@@ -42,6 +42,8 @@ set foldlevelstart=99	" Start with everything unfolded
 set foldmethod=indent	" Fold based on indentation
 set rulerformat=%l\:%c	"Better rule format, we don't care about relative character pos
 set omnifunc=syntaxcomplete#Complete	" Omnicomplete
+set wrap		" Wrap lines visually
+set linebreak	" Break at natural points
 
 " Key remaps
 let mapleader=","

@@ -156,6 +156,8 @@ else
     start_agent;
 fi
 
+alias vi="vim"
+
 # Random useful gotos
 alias gotodev="cd ~/dev/hotscounter/"
 alias gotoprod="cd /opt/hotscounter/"

@@ -28,6 +28,8 @@ colorscheme molokai
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
+set shiftround
 
 set wildmenu	" Show visual menu when tabbing through stuff
 set number		" Show line numbers

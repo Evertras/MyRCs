@@ -73,9 +73,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# Override for nice warning when we're in prod
-PS1='`if [[ \w =~ "opt/hotscounter" ]]; then echo "\[\033[1;31;46m\]"; fi`[\t \w]\[\033[1;32;49m\]>> \[\033[0m\]'
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"

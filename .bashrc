@@ -159,8 +159,6 @@ fi
 alias vi="vim"
 
 # Random useful gotos
-alias gotodev="cd ~/dev/hotscounter/"
-alias gotoprod="cd /opt/hotscounter/"
 alias editbash="vim ~/.bashrc"
 alias reloadbash="source ~/.bashrc"
 alias editvim="vim ~/.vimrc"

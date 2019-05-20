@@ -42,6 +42,7 @@ alias egrep='egrep --color=auto'
 alias editbash='vim ~/.bashrc'
 alias reloadbash='source ~/.bashrc'
 alias editvim='vim ~/.vimrc'
+alias edittmux='vim ~/.tmux.conf'
 
 # Prompt
 fg_rgb() {

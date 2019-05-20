@@ -1,86 +1,73 @@
-" NOTE: Requires Vundle -- https://github.com/gmarik/Vundle.vim
-" Vundle config
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Required
-Plugin 'gmarik/Vundle.vim'
-
-" HTML5 support
-Plugin 'othree/html5.vim'
-
-" CSS coloring
-Plugin 'ap/vim-css-color'
-
-" Syntastic
-Plugin 'scrooloose/syntastic'
-
-call vundle#end()
-filetype plugin on
-filetype plugin indent on
-
-" Our color scheme
-colorscheme molokai
 syntax enable
 
-" Tab settings
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set shiftround
+let mapleader=','
 
-set wildmenu	" Show visual menu when tabbing through stuff
-set number		" Show line numbers
-set relativenumber	" Show relative line numbers around current line
-set showcmd		" Show last command in bottom right
-set cursorline	" Highlight current line
-set lazyredraw	" Redraw only when needed
-set incsearch	" Search while typing
-set hlsearch	" Highlight matches
-set foldenable	" Enable folding
-set foldlevelstart=99	" Start with everything unfolded
-set foldmethod=indent	" Fold based on indentation
-set rulerformat=%l\:%c	"Better rule format, we don't care about relative character pos
-set omnifunc=syntaxcomplete#Complete	" Omnicomplete
-set wrap		" Wrap lines visually
-set linebreak	" Break at natural points
+" VUNDLE
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-" Key remaps
-let mapleader=","
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
 
-" Clear highlighted search with ,<space>
-nnoremap <leader><space> :nohlsearch<CR>
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
 
-" Omnicomplete mappings
-inoremap <C-Space> <C-x><C-o>
-inoremap <C-@> <C-Space>
-inoremap <A-n> <C-n>
-inoremap <A-p> <C-p>
+Plugin 'vim-syntastic/syntastic'
+Plugin 'Quramy/tsuquyomi'
+Plugin 'leafgarland/typescript-vim'
 
-" Swap colon/semicolon functionality
-" EDIT: No swap for now, just straight up replace ; with : and still keep :
-nnoremap ; :
-" nnoremap : ;
-" vnoremap : ;
-vnoremap ; :
+Plugin 'scrooloose/nerdtree'
 
-" Space toggles folds
-nnoremap <space> za
+Plugin 'owickstrom/vim-colors-paramount'
+Plugin 'dikiaap/minimalist'
 
-" Quick escape key
-inoremap jk <esc>
+call vundle#end()            " required
+filetype plugin indent on    " required
+" /VUNDLE
 
-" Starting Syntastic settings
-" set statusline += %#warningmessage#
-" set statusline += %{SyntasticStatusLineFlag()}
-" set statusline += %*
+colorscheme minimalist
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_exec = 'tidy5'
-let g:syntastic_html_tidy_ignore_errors = [" proprietary attribute \"ng-", " proprietary attribute \"autoscroll", "trimming empty", "is not recognized", "discarding unexpected"]
+
+let g:tsuquyomi_completion_detail = 1
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+inoremap jk <esc>
+set number
+set relativenumber
+set incsearch
+set hlsearch
+set wildmode=longest,list
+nnoremap <leader><space> :nohlsearch<CR>
+
+nnoremap ; :
+vnoremap ; :
+
+inoremap <leader>f :TsuQuickFix
+
+filetype plugin indent on
+" show existing tab with 4 spaces width
+set tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+
+autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+map <C-n> :NERDTreeToggle<CR>
+
+hi Normal guibg=NONE ctermbg=NONE
+hi NonText guibg=NONE ctermbg=NONE
+

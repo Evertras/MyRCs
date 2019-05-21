@@ -1,8 +1,8 @@
 shopt -s checkwinsize
 shopt -s histappend
 
-EDITOR=vim
-VISUAL=vim
+EDITOR=nvim
+VISUAL=nvim
 
 ####################
 #### COLORS ########
@@ -39,10 +39,10 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias editbash='vim ~/.bashrc'
+alias editbash='nvim ~/.bashrc'
 alias reloadbash='source ~/.bashrc'
-alias editvim='vim ~/.vimrc'
-alias edittmux='vim ~/.tmux.conf'
+alias editvim='nvim ~/.vimrc'
+alias edittmux='nvim ~/.tmux.conf'
 
 # Prompt
 fg_rgb() {
@@ -85,4 +85,6 @@ HOMEBREW_PREFIX=$(brew --prefix)
 
 # Ruby
 eval "$(rbenv init -)"
+
+alias vim=nvim
 

@@ -22,6 +22,9 @@ else
 	Plugin 'roxma/vim-hug-neovim-rpc'
 endif
 
+" Gotta go fast
+Plugin 'easymotion/vim-easymotion'
+
 " Git stuff
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -50,17 +53,24 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 " /VUNDLE
 
-" Using minimalist for now, but...
+" Using minimalist as a base, but...
 colorscheme minimalist
 
-" ...we make some adjustments for nice transparency effects in iterm2
-hi Normal guibg=NONE ctermbg=NONE
-hi NonText guibg=NONE ctermbg=NONE
+" ...we make some adjustments for slick transparency effects in iterm2
+hi Normal       ctermbg=NONE
+hi NonText      ctermbg=NONE
+hi Comment      ctermfg=103   cterm=bold
+hi NERDTreeFile ctermfg=244
+hi LineNr       ctermbg=NONE
+hi StatusLine   ctermbg=NONE  ctermfg=244
+hi StatusLineNC ctermbg=NONE  ctermfg=240
+hi VertSplit    ctermbg=NONE
+hi SignColumn   ctermbg=NONE
 
 " ...and some more interesting colors for git diffs
-hi DiffAdd ctermfg=112
-hi DiffChange ctermfg=214
-hi DiffDelete ctermfg=167
+hi DiffAdd    ctermfg=112 ctermbg=NONE
+hi DiffChange ctermfg=214 ctermbg=NONE
+hi DiffDelete ctermfg=167 ctermbg=NONE
 
 " General rebinds for convenience
 let mapleader=','
@@ -80,6 +90,10 @@ set shortmess+=c
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
+
+" EASYMOTION settings
+let g:EasyMotion_do_mapping = 0
+nmap <leader>s <Plug>(easymotion-overwin-f)
 
 " DEOPLETE settings
 let g:deoplete#enable_at_startup = 1

@@ -88,3 +88,5 @@ eval "$(rbenv init -)"
 
 alias vim=nvim
 
+PATH=${PATH}:~/go/bin
+

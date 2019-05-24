@@ -16,14 +16,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-if !has ('nvim')
-else
-	Plugin 'roxma/nvim-yarp'
-	Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-
 " Gotta go fast
 Plugin 'easymotion/vim-easymotion'
+
+" Editorconfig stuff
+Plugin 'editorconfig/editorconfig-vim'
 
 " Git stuff
 Plugin 'tpope/vim-fugitive'
@@ -42,11 +39,13 @@ Plugin 'leafgarland/typescript-vim'
 Plugin 'mhartington/nvim-typescript'
 Plugin 'posva/vim-vue'
 
+" Go stuff
+Plugin 'fatih/vim-go'
+
 " File tree
 Plugin 'scrooloose/nerdtree'
 
-" Colors to choose from... only using minimalist for now but eh
-Plugin 'owickstrom/vim-colors-paramount'
+" Base colors
 Plugin 'dikiaap/minimalist'
 
 call vundle#end()            " required
@@ -78,6 +77,10 @@ inoremap jk <esc>
 nnoremap <leader><space> :nohlsearch<CR>
 nnoremap ; :
 vnoremap ; :
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " General settings
 set number
@@ -90,13 +93,21 @@ set shortmess+=c
 filetype plugin indent on
 set tabstop=4
 set shiftwidth=4
+set splitbelow
+set splitright
 
 " EASYMOTION settings
 let g:EasyMotion_do_mapping = 0
-nmap <leader>s <Plug>(easymotion-overwin-f)
+nmap ' <Plug>(easymotion-overwin-f)
+
+" EDITORCONFIG settings
+let g:EditorConfig_exclude_patterns = ['fugitive://.\*'] " To avoid conflicts with fugitive
 
 " DEOPLETE settings
 let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option('omni_patterns', {
+\ 'go': '[^. *\t]\.\w*',
+\})
 
 " ECHODOC settings
 let g:echodoc#enable_at_startup = 1
@@ -121,10 +132,15 @@ smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
 
 " NVIM_TYPESCRIPT settings
 let g:nvim_typescript#vue_support = 1
-nnoremap <leader>t :TSType<CR>
-nnoremap <leader>d :TSDef<CR>
-nnoremap <leader>r :TSRefs<CR>
-nnoremap <leader>i :TSImport<CR>
+autocmd FileType typescript nnoremap <leader>t :TSType<CR>
+autocmd FileType typescript nnoremap <leader>d :TSDef<CR>
+autocmd FileType typescript nnoremap <leader>r :TSRefs<CR>
+autocmd FileType typescript nnoremap <leader>i :TSImport<CR>
+
+" VIM-GO settings
+autocmd FileType go nnoremap <leader>i :GoImports<CR>
+autocmd FileType go nnoremap <leader>v :GoVet<CR>
+autocmd FileType go nnoremap <leader>d :GoDef<CR>
 
 " GITGUTTER settings
 let g:gitgutter_override_sign_column_highlight = 0

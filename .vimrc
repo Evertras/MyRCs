@@ -1,19 +1,12 @@
 syntax enable
 
-" VUNDLE
+" VUNDLE BOILERPLATE
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
-if !has ('nvim')
-	set pyx=3
-	set pyxversion=3
-endif
-
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle, required
+" Let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
 " Gotta go fast
@@ -23,16 +16,11 @@ Plugin 'easymotion/vim-easymotion'
 Plugin 'editorconfig/editorconfig-vim'
 
 " Git stuff
-Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 
 " Autocomplete stuff
 Plugin 'Shougo/deoplete.nvim'
-Plugin 'Shougo/denite.nvim'
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/echodoc.vim'
+" Plugin 'Shougo/denite.nvim'
 
 " Typescript/Vue stuff
 Plugin 'leafgarland/typescript-vim'
@@ -41,6 +29,9 @@ Plugin 'posva/vim-vue'
 
 " Go stuff
 Plugin 'fatih/vim-go'
+
+" YAML stuff that's faster than defaults
+Plugin 'stephpy/vim-yaml'
 
 " File tree
 Plugin 'scrooloose/nerdtree'
@@ -109,38 +100,33 @@ call deoplete#custom#option('omni_patterns', {
 \ 'go': '[^. *\t]\.\w*',
 \})
 
-" ECHODOC settings
-let g:echodoc#enable_at_startup = 1
-
 " NEOSNIPPET settings
 let g:neosnippet#enable_completed_snippet = 1
 
 " Remap tab to autocomplete naturally with deoplete/neosnippet
-imap <expr><TAB>
- \ pumvisible() ? "\<C-n>" :
- \ neosnippet#expandable_or_jumpable() ?
- \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
- \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-imap <expr><S-TAB>
- \ pumvisible() ? "\<C-p>" : "\<TAB>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " Remap enter key to finish an autocomplete selection
-imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() .
-      \ "\<Plug>(neosnippet_jump_or_expand)" : "\<CR>"
-smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
+imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
 
 " NVIM_TYPESCRIPT settings
-let g:nvim_typescript#vue_support = 1
+let g:nvim_typescript#vue_support = 0
+let g:nvim_typescript#max_completion_detail = 100
+let g:nvim_typescript#signature_complete = 0
 autocmd FileType typescript nnoremap <leader>t :TSType<CR>
 autocmd FileType typescript nnoremap <leader>d :TSDef<CR>
 autocmd FileType typescript nnoremap <leader>r :TSRefs<CR>
 autocmd FileType typescript nnoremap <leader>i :TSImport<CR>
 
+" VIM-VUE settings
+autocmd FileType vue syntax sync fromstart
+
 " VIM-GO settings
 autocmd FileType go nnoremap <leader>i :GoImports<CR>
 autocmd FileType go nnoremap <leader>v :GoVet<CR>
 autocmd FileType go nnoremap <leader>d :GoDef<CR>
+autocmd FileType go nnoremap <leader>f :GoInfo<CR>
 
 " GITGUTTER settings
 let g:gitgutter_override_sign_column_highlight = 0

@@ -55,9 +55,9 @@ bg_rgb() {
 
 success_symbol() {
 	if [[ "$?" == 0 ]]; then
-		echo -en "\033[38;2;62;124;177m✔"
+		echo -en "\[\033[38;2;62;124;177m\]✔"
 	else
-		echo -en "\033[38;2;200;80;0m✖"
+		echo -en "\[\033[38;2;200;80;0m\]✖"
 	fi
 }
 
@@ -74,7 +74,11 @@ parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1/'
 }
 
-export PS1="\[${COLOR_B_BG}\] "'$(success_symbol)'" \[${COLOR_B_FG}${COLOR_A_BG}\]\[${COLOR_A_BG}\] \w"'$(parse_git_branch)'"\[${COLOR_A_FG}\] \[${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+set_bash_prompt() {
+	PS1="\[${COLOR_B_BG}\] $(success_symbol) \[${COLOR_B_FG}${COLOR_A_BG}\]\[${COLOR_A_BG}\] \w$(parse_git_branch)\[${COLOR_A_FG}\] \[${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+}
+
+PROMPT_COMMAND=set_bash_prompt
 
 export TERM=xterm-256color
 
@@ -88,5 +92,5 @@ eval "$(rbenv init -)"
 
 alias vim=nvim
 
-PATH=${PATH}:~/go/bin
+PATH=${PATH}:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
 

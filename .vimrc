@@ -33,6 +33,9 @@ Plugin 'fatih/vim-go'
 " YAML stuff that's faster than defaults
 Plugin 'stephpy/vim-yaml'
 
+" TOML stuff
+Plugin 'cespare/vim-toml'
+
 " File tree
 Plugin 'scrooloose/nerdtree'
 
@@ -118,6 +121,7 @@ autocmd FileType typescript nnoremap <leader>t :TSType<CR>
 autocmd FileType typescript nnoremap <leader>d :TSDef<CR>
 autocmd FileType typescript nnoremap <leader>r :TSRefs<CR>
 autocmd FileType typescript nnoremap <leader>i :TSImport<CR>
+autocmd FileType typescript nnoremap <leader>f :TSGetCodeFix<CR>
 
 " VIM-VUE settings
 autocmd FileType vue syntax sync fromstart
@@ -127,6 +131,7 @@ autocmd FileType go nnoremap <leader>i :GoImports<CR>
 autocmd FileType go nnoremap <leader>v :GoVet<CR>
 autocmd FileType go nnoremap <leader>d :GoDef<CR>
 autocmd FileType go nnoremap <leader>f :GoInfo<CR>
+let g:go_fmt_options = { 'gofmt': '-s' }
 
 " GITGUTTER settings
 let g:gitgutter_override_sign_column_highlight = 0
@@ -138,6 +143,7 @@ let g:gitgutter_sign_modified_removed = '➟'
 
 " NERDTREE settings
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeIgnore = ['^node_modules$']
 
 " When we open vim, open it with Nerdtree if and only if we did 'vim .' (or
 " some directory)

@@ -41,24 +41,51 @@ Plugin 'scrooloose/nerdtree'
 
 " Base colors
 Plugin 'dikiaap/minimalist'
+Plugin 'NLKNguyen/papercolor-theme'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 " /VUNDLE
 
-" Using minimalist as a base, but...
-colorscheme minimalist
+" Switch between light/dark color schemes easily... these
+" are defined in our .bashrc so we can also switch tmux
+let s:scheme = $EVERTRAS_SCREEN_MODE
+let s:transparency = $EVERTRAS_SCREEN_TRANSPARENCY
 
-" ...we make some adjustments for slick transparency effects in iterm2
-hi Normal       ctermbg=NONE
-hi NonText      ctermbg=NONE
-hi Comment      ctermfg=103   cterm=bold
-hi NERDTreeFile ctermfg=244
-hi LineNr       ctermbg=NONE
-hi StatusLine   ctermbg=NONE  ctermfg=244
-hi StatusLineNC ctermbg=NONE  ctermfg=240
-hi VertSplit    ctermbg=NONE
-hi SignColumn   ctermbg=NONE
+if s:scheme == 'dark'
+	" Using minimalist as a base, but...
+	colorscheme minimalist
+
+	if s:transparency == 'true'
+		" ...we make some adjustments for slick transparency effects in iterm2
+		hi Normal       ctermbg=NONE
+		hi NonText      ctermbg=NONE
+		hi Comment      ctermfg=103   cterm=bold
+		hi NERDTreeFile ctermfg=244
+		hi LineNr       ctermbg=NONE
+		hi StatusLine   ctermbg=NONE  ctermfg=244
+		hi StatusLineNC ctermbg=NONE  ctermfg=240
+		hi VertSplit    ctermbg=NONE
+		hi SignColumn   ctermbg=NONE
+	endif
+else
+	" Using papercolor as a base, but...
+	set background=light
+	colorscheme PaperColor
+
+	if s:transparency == 'true'
+		" ...we make some adjustments for slick transparency effects in iterm2
+		hi Normal       ctermbg=NONE
+		hi NonText      ctermbg=NONE
+		hi Comment      ctermfg=028   cterm=bold
+		hi NERDTreeFile ctermfg=237
+		hi LineNr       ctermbg=NONE
+		hi StatusLine   ctermbg=NONE  ctermfg=244
+		hi StatusLineNC ctermbg=NONE  ctermfg=240
+		hi VertSplit    ctermbg=NONE
+		hi SignColumn   ctermbg=NONE
+	endif
+endif
 
 " ...and some more interesting colors for git diffs
 hi DiffAdd    ctermfg=112 ctermbg=NONE
@@ -90,6 +117,9 @@ set tabstop=4
 set shiftwidth=4
 set splitbelow
 set splitright
+
+" Make vim check if it needs to reload with autoread
+au FocusGained,BufEnter * :checktime
 
 " EASYMOTION settings
 let g:EasyMotion_do_mapping = 0

@@ -94,3 +94,8 @@ alias vim=nvim
 
 PATH=${PATH}:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
 
+# For vim/tmux colors... change this to switch between light/dark
+export EVERTRAS_SCREEN_MODE=light
+# export EVERTRAS_SCREEN_MODE=dark
+export EVERTRAS_SCREEN_TRANSPARENCY=false
+

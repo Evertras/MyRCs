@@ -42,6 +42,7 @@ Plugin 'scrooloose/nerdtree'
 " Base colors
 Plugin 'dikiaap/minimalist'
 Plugin 'NLKNguyen/papercolor-theme'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -69,9 +70,9 @@ if s:scheme == 'dark'
 		hi SignColumn   ctermbg=NONE
 	endif
 else
-	" Using papercolor as a base, but...
+	" Using solarized as a base, but...
 	set background=light
-	colorscheme PaperColor
+	colorscheme solarized
 
 	if s:transparency == 'true'
 		" ...we make some adjustments for slick transparency effects in iterm2

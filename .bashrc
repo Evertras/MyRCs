@@ -7,6 +7,12 @@ VISUAL=nvim
 ####################
 #### COLORS ########
 ####################
+
+# For vim/tmux colors... change this to switch between light/dark
+export EVERTRAS_SCREEN_MODE=light
+# export EVERTRAS_SCREEN_MODE=dark
+export EVERTRAS_SCREEN_TRANSPARENCY=false
+
 COLOR_RESET="\033[0m"
 COLOR_RESET_BG="\033[49m"
 COLOR_LIGHT_GREEN="\033[38;5;2m"
@@ -61,14 +67,17 @@ success_symbol() {
 	fi
 }
 
-COLOR_A_FG=$(fg_rgb 62 124 177)
-COLOR_A_BG=$(bg_rgb 62 124 177)
-COLOR_B_FG=$(fg_rgb 219 228 238)
-COLOR_B_BG=$(bg_rgb 219 228 238)
-COLOR_ACC_BG=$(fg_rgb 241 115 0)
-COLOR_ACC_FG=$(bg_rgb 241 115 0)
-COLOR_DARK_FG=$(fg_rgb 30 30 50)
-COLOR_DARK_BG=$(bg_rgb 30 30 50)
+if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
+	COLOR_A_FG=$(fg_rgb 62 124 177)
+	COLOR_A_BG=$(bg_rgb 62 124 177)
+	COLOR_B_FG=$(fg_rgb 219 228 238)
+	COLOR_B_BG=$(bg_rgb 219 228 238)
+else
+	COLOR_A_FG=$(fg_rgb 177 124 62)
+	COLOR_A_BG=$(bg_rgb 177 124 62)
+	COLOR_B_FG=$(fg_rgb 220 200 150)
+	COLOR_B_BG=$(bg_rgb 220 200 150)
+fi
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1/'
@@ -93,9 +102,4 @@ eval "$(rbenv init -)"
 alias vim=nvim
 
 PATH=${PATH}:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
-
-# For vim/tmux colors... change this to switch between light/dark
-export EVERTRAS_SCREEN_MODE=light
-# export EVERTRAS_SCREEN_MODE=dark
-export EVERTRAS_SCREEN_TRANSPARENCY=false
 

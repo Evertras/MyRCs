@@ -84,7 +84,7 @@ parse_git_branch() {
 }
 
 set_bash_prompt() {
-	PS1="\[${COLOR_B_BG}\] $(success_symbol) \[${COLOR_B_FG}${COLOR_A_BG}\]\[${COLOR_A_BG}\] \w$(parse_git_branch)\[${COLOR_A_FG}\] \[${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+	PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]  \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
 }
 
 PROMPT_COMMAND=set_bash_prompt

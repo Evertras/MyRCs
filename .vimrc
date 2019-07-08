@@ -69,10 +69,19 @@ if s:scheme == 'dark'
 		hi VertSplit    ctermbg=NONE
 		hi SignColumn   ctermbg=NONE
 	endif
+
+	" ...and some more interesting colors for git diffs
+	hi DiffAdd    ctermfg=112 ctermbg=NONE
+	hi DiffChange ctermfg=214 ctermbg=NONE
+	hi DiffDelete ctermfg=167 ctermbg=NONE
 else
 	" Using solarized as a base, but...
 	set background=light
 	colorscheme solarized
+
+	" ...we want to highlight the line we're on
+	set cursorline
+	hi CursorLine ctermbg=223
 
 	if s:transparency == 'true'
 		" ...we make some adjustments for slick transparency effects in iterm2
@@ -86,12 +95,12 @@ else
 		hi VertSplit    ctermbg=NONE
 		hi SignColumn   ctermbg=NONE
 	endif
-endif
 
-" ...and some more interesting colors for git diffs
-hi DiffAdd    ctermfg=112 ctermbg=NONE
-hi DiffChange ctermfg=214 ctermbg=NONE
-hi DiffDelete ctermfg=167 ctermbg=NONE
+	" ...and some more interesting colors for git diffs
+	hi DiffAdd    ctermfg=155 ctermbg=NONE
+	hi DiffChange ctermfg=221 ctermbg=NONE
+	hi DiffDelete ctermfg=001 ctermbg=NONE
+endif
 
 " General rebinds for convenience
 let mapleader=','

@@ -1,17 +1,14 @@
 shopt -s checkwinsize
 shopt -s histappend
 
-EDITOR=nvim
-VISUAL=nvim
-
 ####################
 #### COLORS ########
 ####################
 
 # For vim/tmux colors... change this to switch between light/dark
-export EVERTRAS_SCREEN_MODE=light
-# export EVERTRAS_SCREEN_MODE=dark
-export EVERTRAS_SCREEN_TRANSPARENCY=false
+# export EVERTRAS_SCREEN_MODE=light
+export EVERTRAS_SCREEN_MODE=dark
+export EVERTRAS_SCREEN_TRANSPARENCY=true
 
 COLOR_RESET="\033[0m"
 COLOR_RESET_BG="\033[49m"
@@ -59,6 +56,18 @@ bg_rgb() {
 	echo -ne "\033[48;2;${1};${2};${3}m"
 }
 
+if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
+	COLOR_A_FG=$(fg_rgb 32 64 128)
+	COLOR_A_BG=$(bg_rgb 32 64 128)
+	COLOR_B_FG=$(fg_rgb 190 190 190)
+	COLOR_B_BG=$(bg_rgb 190 190 190)
+else
+	COLOR_A_FG=$(fg_rgb 177 124 62)
+	COLOR_A_BG=$(bg_rgb 177 124 62)
+	COLOR_B_FG=$(fg_rgb 220 200 150)
+	COLOR_B_BG=$(bg_rgb 220 200 150)
+fi
+
 success_symbol() {
 	if [[ "$?" == 0 ]]; then
 		echo -en "\[\033[38;2;62;124;177m\]✔"
@@ -66,18 +75,6 @@ success_symbol() {
 		echo -en "\[\033[38;2;200;80;0m\]✖"
 	fi
 }
-
-if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-	COLOR_A_FG=$(fg_rgb 62 124 177)
-	COLOR_A_BG=$(bg_rgb 62 124 177)
-	COLOR_B_FG=$(fg_rgb 219 228 238)
-	COLOR_B_BG=$(bg_rgb 219 228 238)
-else
-	COLOR_A_FG=$(fg_rgb 177 124 62)
-	COLOR_A_BG=$(bg_rgb 177 124 62)
-	COLOR_B_FG=$(fg_rgb 220 200 150)
-	COLOR_B_BG=$(bg_rgb 220 200 150)
-fi
 
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1/'
@@ -107,4 +104,8 @@ PATH=${PATH}:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
 docker-nuke-volumes() {
 	docker volume ls | tail -n+2 | awk '{print $2}' | xargs docker volume rm
 }
+
+# Use nvim for all our editing needs
+export EDITOR=nvim
+export VISUAL=nvim
 

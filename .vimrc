@@ -74,6 +74,8 @@ if s:scheme == 'dark'
 	hi DiffAdd    ctermfg=112 ctermbg=NONE
 	hi DiffChange ctermfg=214 ctermbg=NONE
 	hi DiffDelete ctermfg=167 ctermbg=NONE
+
+	hi Search ctermbg=023
 else
 	" Using solarized as a base, but...
 	set background=light
@@ -163,6 +165,7 @@ autocmd FileType typescript nnoremap <leader>d :TSDef<CR>
 autocmd FileType typescript nnoremap <leader>r :TSRefs<CR>
 autocmd FileType typescript nnoremap <leader>i :TSImport<CR>
 autocmd FileType typescript nnoremap <leader>f :TSGetCodeFix<CR>
+autocmd FileType typescript nnoremap <leader>e :TSGetErrorFull<CR>
 
 " VIM-VUE settings
 autocmd FileType vue syntax sync fromstart

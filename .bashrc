@@ -57,10 +57,10 @@ bg_rgb() {
 }
 
 if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-	COLOR_A_FG=$(fg_rgb 32 64 128)
-	COLOR_A_BG=$(bg_rgb 32 64 128)
-	COLOR_B_FG=$(fg_rgb 190 190 190)
-	COLOR_B_BG=$(bg_rgb 190 190 190)
+	COLOR_B_FG=$(fg_rgb 44 44 44)
+	COLOR_B_BG=$(bg_rgb 44 44 44)
+	COLOR_A_FG=$(fg_rgb 190 190 190)
+	COLOR_A_BG=$(bg_rgb 190 190 190)
 else
 	COLOR_A_FG=$(fg_rgb 177 124 62)
 	COLOR_A_BG=$(bg_rgb 177 124 62)
@@ -81,7 +81,7 @@ parse_git_branch() {
 }
 
 set_bash_prompt() {
-	PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]  \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+	PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
 }
 
 PROMPT_COMMAND=set_bash_prompt

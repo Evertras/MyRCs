@@ -20,7 +20,6 @@ Plugin 'airblade/vim-gitgutter'
 
 " Autocomplete stuff
 Plugin 'Shougo/deoplete.nvim'
-" Plugin 'Shougo/denite.nvim'
 
 " Typescript/Vue stuff
 Plugin 'leafgarland/typescript-vim'
@@ -38,6 +37,9 @@ Plugin 'cespare/vim-toml'
 
 " File tree
 Plugin 'scrooloose/nerdtree'
+
+" Quicker commenting
+Plugin 'scrooloose/nerdcommenter'
 
 " Base colors
 Plugin 'dikiaap/minimalist'

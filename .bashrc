@@ -100,6 +100,11 @@ alias vim=nvim
 
 PATH=${PATH}:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
 
+# Perl
+if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
+	source ~/perl5/perlbrew/etc/bashrc
+fi
+
 # Random useful utility functions
 docker-nuke-volumes() {
 	docker volume ls | tail -n+2 | awk '{print $2}' | xargs docker volume rm

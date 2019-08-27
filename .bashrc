@@ -59,8 +59,8 @@ bg_rgb() {
 if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
 	COLOR_B_FG=$(fg_rgb 44 44 44)
 	COLOR_B_BG=$(bg_rgb 44 44 44)
-	COLOR_A_FG=$(fg_rgb 190 190 190)
-	COLOR_A_BG=$(bg_rgb 190 190 190)
+	COLOR_A_FG=$(fg_rgb 190 130 44)
+	COLOR_A_BG=$(bg_rgb 190 130 44)
 else
 	COLOR_A_FG=$(fg_rgb 177 124 62)
 	COLOR_A_BG=$(bg_rgb 177 124 62)

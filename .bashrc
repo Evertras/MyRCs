@@ -57,10 +57,18 @@ bg_rgb() {
 }
 
 if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-	COLOR_B_FG=$(fg_rgb 44 44 44)
-	COLOR_B_BG=$(bg_rgb 44 44 44)
-	COLOR_A_FG=$(fg_rgb 190 130 44)
-	COLOR_A_BG=$(bg_rgb 190 130 44)
+	COLOR_A_R=20
+	COLOR_A_G=0
+	COLOR_A_B=0
+
+	COLOR_B_R=200
+	COLOR_B_G=100
+	COLOR_B_B=150
+
+	COLOR_B_FG=$(fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
+	COLOR_B_BG=$(bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
+	COLOR_A_FG=$(fg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
+	COLOR_A_BG=$(bg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
 else
 	COLOR_A_FG=$(fg_rgb 177 124 62)
 	COLOR_A_BG=$(bg_rgb 177 124 62)
@@ -70,9 +78,9 @@ fi
 
 success_symbol() {
 	if [[ "$?" == 0 ]]; then
-		echo -en "\[\033[38;2;62;124;177m\]✔"
+		echo -en "\[${COLOR_A_FG}\]✔"
 	else
-		echo -en "\[\033[38;2;200;80;0m\]✖"
+		echo -en "\[${COLOR_A_FG}\]✖"
 	fi
 }
 

@@ -1,54 +1,47 @@
 syntax enable
 
-" VUNDLE BOILERPLATE
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+set nocompatible
 
-" Let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" PLUGINS
+call plug#begin('~/.vim/plugged')
 
 " Gotta go fast
-Plugin 'easymotion/vim-easymotion'
-
-" Editorconfig stuff
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'easymotion/vim-easymotion'
 
 " Git stuff
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " Autocomplete stuff
-Plugin 'Shougo/deoplete.nvim'
+function! DoRemote(arg)
+    UpdateRemotePlugins
+endfunction
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 
-" Typescript/Vue stuff
-Plugin 'leafgarland/typescript-vim'
-Plugin 'mhartington/nvim-typescript'
-Plugin 'posva/vim-vue'
+" Typescript stuff
+Plug 'leafgarland/typescript-vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
+Plug 'Quramy/tsuquyomi'
+Plug 'rudism/deoplete-tsuquyomi'
 
 " Go stuff
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " YAML stuff that's faster than defaults
-Plugin 'stephpy/vim-yaml'
+Plug 'stephpy/vim-yaml'
 
 " TOML stuff
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 
 " File tree
-Plugin 'scrooloose/nerdtree'
-
-" Quicker commenting
-Plugin 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 
 " Base colors
-Plugin 'dikiaap/minimalist'
-Plugin 'NLKNguyen/papercolor-theme'
-Plugin 'altercation/vim-colors-solarized'
+Plug 'dikiaap/minimalist'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'altercation/vim-colors-solarized'
 
-call vundle#end()            " required
-filetype plugin indent on    " required
-" /VUNDLE
+call plug#end()
+" /PLUGINS
 
 " Switch between light/dark color schemes easily... these
 " are defined in our .bashrc so we can also switch tmux
@@ -132,6 +125,9 @@ set shiftwidth=4
 set splitbelow
 set splitright
 
+" Stop adding new comment starts on newlines
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " Make vim check if it needs to reload with autoread
 au FocusGained,BufEnter * :checktime
 
@@ -139,35 +135,20 @@ au FocusGained,BufEnter * :checktime
 let g:EasyMotion_do_mapping = 0
 nmap ' <Plug>(easymotion-overwin-f)
 
-" EDITORCONFIG settings
-let g:EditorConfig_exclude_patterns = ['fugitive://.\*'] " To avoid conflicts with fugitive
-
 " DEOPLETE settings
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option('omni_patterns', {
-\ 'go': '[^. *\t]\.\w*',
-\})
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 
-" NEOSNIPPET settings
-let g:neosnippet#enable_completed_snippet = 1
-
-" Remap tab to autocomplete naturally with deoplete/neosnippet
-imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
-
-" Remap enter key to finish an autocomplete selection
-imap <expr><silent><CR> pumvisible() ? deoplete#mappings#close_popup() : "\<CR>"
-
-" NVIM_TYPESCRIPT settings
-let g:nvim_typescript#vue_support = 0
-let g:nvim_typescript#max_completion_detail = 100
-let g:nvim_typescript#signature_complete = 0
-autocmd FileType typescript nnoremap <leader>t :TSType<CR>
-autocmd FileType typescript nnoremap <leader>d :TSDef<CR>
-autocmd FileType typescript nnoremap <leader>r :TSRefs<CR>
-autocmd FileType typescript nnoremap <leader>i :TSImport<CR>
-autocmd FileType typescript nnoremap <leader>f :TSGetCodeFix<CR>
-autocmd FileType typescript nnoremap <leader>e :TSGetErrorFull<CR>
+" TYPESCRIPT settings
+let g:tsuquyomi_auto_open = 1
+autocmd FileType typescript nnoremap <leader>t :TsuType<CR>
+autocmd FileType typescript nnoremap <leader>d :TsuDefinition<CR>
+autocmd FileType typescript nnoremap <leader>r :TsuReferences<CR>
+autocmd FileType typescript nnoremap <leader>i :TsuImport<CR>
+autocmd FileType typescript nnoremap <leader>f :TsuQuickFix<CR>
+autocmd FileType typescript nnoremap <leader>e :TsuGeterr<CR>
 
 " VIM-VUE settings
 autocmd FileType vue syntax sync fromstart

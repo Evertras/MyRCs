@@ -24,9 +24,6 @@ Plug 'posva/vim-vue'
 " Go stuff
 Plug 'fatih/vim-go'
 
-" YAML stuff that's faster than defaults
-Plug 'stephpy/vim-yaml'
-
 " TOML stuff
 Plug 'cespare/vim-toml'
 

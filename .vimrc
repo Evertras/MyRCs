@@ -8,20 +8,18 @@ call plug#begin('~/.vim/plugged')
 " Gotta go fast
 Plug 'easymotion/vim-easymotion'
 
+" Editorconfig stuff
+Plug 'editorconfig/editorconfig-vim'
+
 " Git stuff
 Plug 'airblade/vim-gitgutter'
 
 " Autocomplete stuff
-function! DoRemote(arg)
-    UpdateRemotePlugins
-endfunction
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 
-" Typescript stuff
+" Typescript syntax stuff
 Plug 'leafgarland/typescript-vim'
-Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_mac.mak' }
-Plug 'Quramy/tsuquyomi'
-Plug 'rudism/deoplete-tsuquyomi'
+Plug 'posva/vim-vue'
 
 " Go stuff
 Plug 'fatih/vim-go'
@@ -128,30 +126,26 @@ set splitright
 " Stop adding new comment starts on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Don't use relative paths for files
+"autocmd BufEnter * lcd %:p:h
+
 " Make vim check if it needs to reload with autoread
 au FocusGained,BufEnter * :checktime
+
+" Tab navigates popup menus
+imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " EASYMOTION settings
 let g:EasyMotion_do_mapping = 0
 nmap ' <Plug>(easymotion-overwin-f)
 
-" DEOPLETE settings
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
-
-" TYPESCRIPT settings
-let g:tsuquyomi_auto_open = 1
-autocmd FileType typescript nnoremap <leader>t :TsuType<CR>
-autocmd FileType typescript nnoremap <leader>d :TsuDefinition<CR>
-autocmd FileType typescript nnoremap <leader>r :TsuReferences<CR>
-autocmd FileType typescript nnoremap <leader>i :TsuImport<CR>
-autocmd FileType typescript nnoremap <leader>f :TsuQuickFix<CR>
-autocmd FileType typescript nnoremap <leader>e :TsuGeterr<CR>
-
-" VIM-VUE settings
-autocmd FileType vue syntax sync fromstart
+" COC settings
+nmap <leader>d <Plug>(coc-definition)
+nmap <leader>y <Plug>(coc-type-definition)
+nmap <leader>i <Plug>(coc-implementation)
+nmap <leader>r <Plug>(coc-references)
+nmap <leader>f <Plug>(coc-fix-current)
 
 " VIM-GO settings
 autocmd FileType go nnoremap <leader>i :GoImports<CR>

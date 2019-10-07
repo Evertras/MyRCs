@@ -38,10 +38,13 @@ export NVM_DIR="$HOME/.nvm"
 
 # Adds color to ls (mac thing)
 export CLICOLOR=true
+
+# Colorize all greps when appropriate
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
+# Quick access to tweak things
 alias editbash='nvim ~/.bashrc'
 alias reloadbash='source ~/.bashrc'
 alias editvim='nvim ~/.vimrc'
@@ -97,6 +100,7 @@ PROMPT_COMMAND=set_bash_prompt
 export TERM=xterm-256color
 
 # Bash completions
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
 HOMEBREW_PREFIX=$(brew --prefix)
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"

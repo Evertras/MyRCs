@@ -21,9 +21,6 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 
-" Go stuff
-Plug 'fatih/vim-go'
-
 " TOML stuff
 Plug 'cespare/vim-toml'
 
@@ -144,11 +141,6 @@ nmap <leader>i <Plug>(coc-implementation)
 nmap <leader>r <Plug>(coc-references)
 nmap <leader>f <Plug>(coc-fix-current)
 
-" VIM-GO settings
-autocmd FileType go nnoremap <leader>i :GoImports<CR>
-autocmd FileType go nnoremap <leader>v :GoVet<CR>
-autocmd FileType go nnoremap <leader>d :GoDef<CR>
-autocmd FileType go nnoremap <leader>f :GoInfo<CR>
 let g:go_fmt_options = { 'gofmt': '-s' }
 
 " GITGUTTER settings

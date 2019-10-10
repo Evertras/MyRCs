@@ -126,3 +126,6 @@ docker-nuke-volumes() {
 export EDITOR=nvim
 export VISUAL=nvim
 
+# We're a dirty 'murican
+export LC_ALL=en_US.UTF-8
+

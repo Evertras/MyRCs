@@ -132,3 +132,5 @@ export LC_ALL=en_US.UTF-8
 # Make GPG signing happen in the correct terminal
 export GPG_TTY="$(tty)"
 
+# Typing "npm run" is oddly annoying
+alias nr='npm run'

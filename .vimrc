@@ -116,6 +116,7 @@ set tabstop=4
 set shiftwidth=4
 set splitbelow
 set splitright
+set colorcolumn=80
 
 " Stop adding new comment starts on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

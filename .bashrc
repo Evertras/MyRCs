@@ -6,9 +6,9 @@ shopt -s histappend
 ####################
 
 # For vim/tmux colors... change this to switch between light/dark
-# export EVERTRAS_SCREEN_MODE=light
-export EVERTRAS_SCREEN_MODE=dark
-export EVERTRAS_SCREEN_TRANSPARENCY=true
+export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-dark}
+export EVERTRAS_SCREEN_TRANSPARENCY=${EVERTRAS_SCREEN_TRANSPARENCY:-true}
+export EVERTRAS_PROMPT_MODE=${EVERTRAS_PROMPT_MODE:-normal}
 
 COLOR_RESET="\033[0m"
 COLOR_RESET_BG="\033[49m"
@@ -95,7 +95,11 @@ set_bash_prompt() {
 	PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
 }
 
-PROMPT_COMMAND=set_bash_prompt
+if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
+	PS1="\[${COLOR_B_FG}\]\w \[${COLOR_B_FG}\]$\[${COLOR_RESET}\] "
+else
+	PROMPT_COMMAND=set_bash_prompt
+fi
 
 export TERM=xterm-256color
 
@@ -134,3 +138,4 @@ export GPG_TTY="$(tty)"
 
 # Typing "npm run" is oddly annoying
 alias nr='npm run'
+

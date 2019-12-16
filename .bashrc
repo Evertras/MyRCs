@@ -68,15 +68,31 @@ if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
 	COLOR_B_G=100
 	COLOR_B_B=150
 
+	COLOR_GIT_FG_R=20
+	COLOR_GIT_FG_G=20
+	COLOR_GIT_FG_B=20
+
+	COLOR_GIT_BG_R=150
+	COLOR_GIT_BG_G=150
+	COLOR_GIT_BG_B=200
+
 	COLOR_B_FG=$(fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
 	COLOR_B_BG=$(bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
 	COLOR_A_FG=$(fg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
 	COLOR_A_BG=$(bg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
+	COLOR_GIT_FG=$(fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
+	COLOR_GIT_BG=$(bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
 else
+	COLOR_GIT_BG_R=150
+	COLOR_GIT_BG_G=150
+	COLOR_GIT_BG_B=200
+
 	COLOR_A_FG=$(fg_rgb 177 124 62)
 	COLOR_A_BG=$(bg_rgb 177 124 62)
 	COLOR_B_FG=$(fg_rgb 220 200 150)
 	COLOR_B_BG=$(bg_rgb 220 200 150)
+	COLOR_GIT_FG=$(fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
+	COLOR_GIT_BG=$(bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
 fi
 
 success_symbol() {
@@ -88,11 +104,12 @@ success_symbol() {
 }
 
 parse_git_branch() {
-	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1/'
+	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1 /'
 }
 
 set_bash_prompt() {
-	PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+	#PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
+	PS1="\[${COLOR_B_BG}\] $(success_symbol)\[${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\] "
 }
 
 if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then

@@ -118,6 +118,9 @@ set splitbelow
 set splitright
 set colorcolumn=80
 
+" Our shell scripts are bash scripts, trust us
+let g:is_bash = 1
+
 " Stop adding new comment starts on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 

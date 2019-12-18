@@ -63,6 +63,31 @@ if s:scheme == 'dark'
 	hi DiffDelete ctermfg=167 ctermbg=NONE
 
 	hi Search ctermbg=023
+elseif s:scheme == 'neutral'
+	" Using minimalist as a base, but...
+	set background=dark
+	colorscheme minimalist
+
+	" ...we want to highlight the line we're on
+	set cursorline
+
+	if s:transparency == 'true'
+		" ...we make some adjustments for slick transparency effects in iterm2
+		hi Normal       ctermbg=NONE
+		hi NonText      ctermbg=NONE
+		hi Comment      ctermfg=107   cterm=bold
+		hi NERDTreeFile ctermfg=247
+		hi LineNr       ctermbg=NONE  ctermfg=245
+		hi StatusLine   ctermbg=NONE  ctermfg=246
+		hi StatusLineNC ctermbg=NONE  ctermfg=243
+		hi VertSplit    ctermbg=NONE
+		hi SignColumn   ctermbg=NONE
+	endif
+
+	" ...and some more interesting colors for git diffs
+	hi DiffAdd    ctermfg=155 ctermbg=NONE
+	hi DiffChange ctermfg=221 ctermbg=NONE
+	hi DiffDelete ctermfg=001 ctermbg=NONE
 else
 	" Using solarized as a base, but...
 	set background=light
@@ -167,4 +192,25 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 
 " If the last open window is Nerdtree, close vim entirely
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" NERDTress File highlighting
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+
+call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+call NERDTreeHighlightFile('go', 'green', 'none', 'green', '#151515')
 

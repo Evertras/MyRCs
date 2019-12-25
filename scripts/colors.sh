@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 fg() {
 	echo "\033[38;5;${1}m"

@@ -24,6 +24,9 @@ Plug 'posva/vim-vue'
 " TOML stuff
 Plug 'cespare/vim-toml'
 
+" FBS stuff
+Plug 'dcharbon/vim-flatbuffers'
+
 " File tree
 Plug 'scrooloose/nerdtree'
 

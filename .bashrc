@@ -182,7 +182,7 @@ alias nr='npm run'
 stty -echoctl
 
 # PATH extensions
-PATH=${PATH}:~/dev/bin:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/
+PATH=${PATH}:~/dev/bin:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/:/usr/local/sbin/
 
 ## TODO: These are important on my mac, but need a better spot to put this for a general RC file...
 # The next line updates PATH for the Google Cloud SDK.

@@ -13,7 +13,6 @@ export CLICOLOR=true
 
 # For vim/tmux colors... change this to switch between light/dark
 export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-light}
-export EVERTRAS_SCREEN_MODE=dark
 export EVERTRAS_SCREEN_TRANSPARENCY=${EVERTRAS_SCREEN_TRANSPARENCY:-true}
 export EVERTRAS_PROMPT_MODE=${EVERTRAS_PROMPT_MODE:-normal}
 

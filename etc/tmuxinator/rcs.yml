@@ -1,0 +1,27 @@
+# /Users/bfulljames/.config/tmuxinator/rcs.yml
+
+name: rcs
+root: ~/
+
+windows:
+  - bashrc:
+      layout: main-horizontal
+      panes:
+        - vim ~/.bashrc
+        - clear
+  - vimrc:
+      layout: main-horizontal
+      panes:
+        - vim ~/.vimrc
+  - tmuxrc:
+      layout: main-horizontal
+      panes:
+        - vim ~/.tmux.conf
+  - tmuxinator:
+      layout: main-horizontal
+      root: ~/.config/tmuxinator
+      panes:
+        - vim .
+  - git:
+      root: ~/dev/github/evertras/myrcs
+

@@ -131,7 +131,6 @@ alias vim=nvim
 alias editbash='nvim ~/.bashrc'
 alias reloadbash='source ~/.bashrc'
 alias editvim='nvim ~/.vimrc'
-alias edittmux='nvim ~/.tmux.conf'
 
 # Typing "npm run" is oddly annoying
 alias nr='npm run'
@@ -158,14 +157,6 @@ up() {
 
 	cd $d
 }
-
-################################################################################
-####################### BASH COMPLETION ########################################
-################################################################################
-
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-HOMEBREW_PREFIX=$(brew --prefix)
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
 
 ################################################################################
 ############################ MISC ##############################################

@@ -1,12 +1,15 @@
-shopt -s checkwinsize
-shopt -s histappend
+# Use this to profile load times and find slow things
+#PS4='+ $EPOCHREALTIME\011 '
+#set -x
 
-# Don't show control characters
-stty -echoctl
+################################################################################
+######################### PROMPT/THEME #########################################
+################################################################################
 
-####################
-#### COLORS ########
-####################
+export TERM=xterm-256color
+
+# Adds color to ls (mac thing)
+export CLICOLOR=true
 
 # For vim/tmux colors... change this to switch between light/dark
 export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-light}
@@ -21,40 +24,6 @@ COLOR_SEA_GREEN="\033[38;5;42m"
 COLOR_ORANGE="\033[38;5;208m"
 COLOR_RED="\033[38;5;196m"
 
-up() {
-	local d=""
-	limit=$1
-	for((i=1 ; i <= limit ; i++))
-		do
-			d=$d/..
-		done
-
-	d=$(echo $d | sed 's/^\///')
-	if [ -z "$d" ]; then
-		d=..
-	fi
-
-	cd $d
-}
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-# Adds color to ls (mac thing)
-export CLICOLOR=true
-
-# Colorize all greps when appropriate
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# Quick access to tweak things
-alias editbash='nvim ~/.bashrc'
-alias reloadbash='source ~/.bashrc'
-alias editvim='nvim ~/.vimrc'
-alias edittmux='nvim ~/.tmux.conf'
-
-# Prompt
 fg_rgb() {
 	echo -ne "\033[38;2;${1};${2};${3}m"
 }
@@ -145,28 +114,71 @@ else
 	PROMPT_COMMAND=set_bash_prompt
 fi
 
-export TERM=xterm-256color
 
-# Bash completions
-export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
-HOMEBREW_PREFIX=$(brew --prefix)
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+################################################################################
+############################ ALIASES ###########################################
+################################################################################
 
-# Ruby
-eval "$(rbenv init -)"
+# Colorize all greps when appropriate
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
+# Just use nvim
 alias vim=nvim
 
-# Perl
-if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
-	source ~/perl5/perlbrew/etc/bashrc
-fi
+# Quick access to tweak things
+alias editbash='nvim ~/.bashrc'
+alias reloadbash='source ~/.bashrc'
+alias editvim='nvim ~/.vimrc'
+alias edittmux='nvim ~/.tmux.conf'
 
-# Random useful utility functions
-docker-nuke-volumes() {
-	docker volume ls | tail -n+2 | awk '{print $2}' | xargs docker volume rm
+# Typing "npm run" is oddly annoying
+alias nr='npm run'
+
+# Some kubectl shortcuts
+alias usens='kubectl config set-context --current --namespace'
+alias usc='kubectl config use-context'
+
+# Usage: up [n]
+#
+# Example: 'up 3' goes up 3 directories
+up() {
+	local d=""
+	limit=$1
+	for((i=1 ; i <= limit ; i++))
+		do
+			d=$d/..
+		done
+
+	d=$(echo $d | sed 's/^\///')
+	if [ -z "$d" ]; then
+		d=..
+	fi
+
+	cd $d
 }
+
+################################################################################
+####################### BASH COMPLETION ########################################
+################################################################################
+
+export BASH_COMPLETION_COMPAT_DIR="/usr/local/etc/bash_completion.d"
+HOMEBREW_PREFIX=$(brew --prefix)
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+
+################################################################################
+############################ MISC ##############################################
+################################################################################
+
+# Reset LINES/COLUMNS after each command
+shopt -s checkwinsize
+
+# Append to history per-command rather than waiting for shell to exit
+shopt -s histappend
+
+# Don't show control characters
+stty -echoctl
 
 # Use nvim for all our editing needs
 export EDITOR=nvim
@@ -178,17 +190,40 @@ export LC_ALL=en_US.UTF-8
 # Make GPG signing happen in the correct terminal
 export GPG_TTY="$(tty)"
 
-# Typing "npm run" is oddly annoying
-alias nr='npm run'
-
-# Some kubectl shortcuts
-alias usens='kubectl config set-context --current --namespace'
-alias usc='kubectl config use-context'
-
 # Machine-specific bash stuff should go in this directory
-for F in ~/.bashrc.d/*; do
-	source ${F}
+for SRCFILE in ~/.bashrc.d/*; do
+	source ${SRCFILE}
 done
 
-# Rust
-export PATH="$HOME/.cargo/bin:$PATH"
+################################################################################
+############################ SLOW ##############################################
+################################################################################
+
+# Slow but useful things
+#
+# These are slow, but useful things that can be turned on via environment vars
+# when working on things that need them.
+
+# Ruby
+if [[ -n ${EVERTRAS_RUBY} ]]; then
+	eval "$(rbenv init -)"
+fi
+
+# NVM
+if [[ -n ${EVERTRAS_NVM} ]]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+# Perl
+if [[ -n ${EVERTRAS_PERL} && -f ~/perl5/perlbrew/etc/bashrc ]]; then
+	source ~/perl5/perlbrew/etc/bashrc
+fi
+
+################################################################################
+############################ END ###############################################
+################################################################################
+
+# Anything past here got auto-added by something and should be moved to ~/.bashrc.d/
+

@@ -196,32 +196,6 @@ for SRCFILE in ~/.bashrc.d/*; do
 done
 
 ################################################################################
-############################ SLOW ##############################################
-################################################################################
-
-# Slow but useful things
-#
-# These are slow, but useful things that can be turned on via environment vars
-# when working on things that need them.
-
-# Ruby
-if [[ -n ${EVERTRAS_RUBY} ]]; then
-	eval "$(rbenv init -)"
-fi
-
-# NVM
-if [[ -n ${EVERTRAS_NVM} ]]; then
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-# Perl
-if [[ -n ${EVERTRAS_PERL} && -f ~/perl5/perlbrew/etc/bashrc ]]; then
-	source ~/perl5/perlbrew/etc/bashrc
-fi
-
-################################################################################
 ############################ END ###############################################
 ################################################################################
 

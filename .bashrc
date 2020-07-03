@@ -1,12 +1,16 @@
 shopt -s checkwinsize
 shopt -s histappend
 
+# Don't show control characters
+stty -echoctl
+
 ####################
 #### COLORS ########
 ####################
 
 # For vim/tmux colors... change this to switch between light/dark
-export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-dark}
+export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-light}
+export EVERTRAS_SCREEN_MODE=dark
 export EVERTRAS_SCREEN_TRANSPARENCY=${EVERTRAS_SCREEN_TRANSPARENCY:-true}
 export EVERTRAS_PROMPT_MODE=${EVERTRAS_PROMPT_MODE:-normal}
 
@@ -154,7 +158,6 @@ eval "$(rbenv init -)"
 
 alias vim=nvim
 
-
 # Perl
 if [ -f ~/perl5/perlbrew/etc/bashrc ]; then
 	source ~/perl5/perlbrew/etc/bashrc
@@ -178,15 +181,14 @@ export GPG_TTY="$(tty)"
 # Typing "npm run" is oddly annoying
 alias nr='npm run'
 
-# Don't show control characters
-stty -echoctl
+# Some kubectl shortcuts
+alias usens='kubectl config set-context --current --namespace'
+alias usc='kubectl config use-context'
 
-# PATH extensions
-PATH=${PATH}:~/dev/bin:~/go/bin:/Applications/TexturePacker.app/Contents/MacOS/:/usr/local/sbin/
+# Machine-specific bash stuff should go in this directory
+for F in ~/.bashrc.d/*; do
+	source ${F}
+done
 
-## TODO: These are important on my mac, but need a better spot to put this for a general RC file...
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/bfulljames/Downloads/google-cloud-sdk/path.bash.inc' ]; then . '/Users/bfulljames/Downloads/google-cloud-sdk/path.bash.inc'; fi
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/bfulljames/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/bfulljames/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
+# Rust
+export PATH="$HOME/.cargo/bin:$PATH"

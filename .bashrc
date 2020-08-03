@@ -134,6 +134,9 @@ alias editvim='nvim ~/.vimrc'
 # Typing "npm run" is oddly annoying
 alias nr='npm run'
 
+# So is 'tmuxinator'
+alias mux='tmuxinator'
+
 # Some kubectl shortcuts
 alias usens='kubectl config set-context --current --namespace'
 alias usc='kubectl config use-context'

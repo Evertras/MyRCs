@@ -170,13 +170,13 @@ let g:EasyMotion_do_mapping = 0
 nmap ' <Plug>(easymotion-overwin-f)
 
 " COC settings
-nmap <leader>d <Plug>(coc-definition)
-nmap <leader>y <Plug>(coc-type-definition)
-nmap <leader>i <Plug>(coc-implementation)
-nmap <leader>r <Plug>(coc-references)
+nmap <silent> <leader>d <Plug>(coc-definition)
+nmap <silent> <leader>y <Plug>(coc-type-definition)
+nmap <silent> <leader>i <Plug>(coc-implementation)
+nmap <silent> <leader>r <Plug>(coc-references)
+nmap <silent> <leader>o :<C-u>CocList outline<cr>
+nmap <silent> <leader>F <Plug>(coc-format)
 nmap <leader>f <Plug>(coc-fix-current)
-
-let g:go_fmt_options = { 'gofmt': '-s' }
 
 " GITGUTTER settings
 let g:gitgutter_override_sign_column_highlight = 0

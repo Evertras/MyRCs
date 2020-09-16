@@ -32,21 +32,21 @@ bg_rgb() {
 }
 
 if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-	COLOR_A_R=20
+	COLOR_A_R=0
 	COLOR_A_G=0
 	COLOR_A_B=0
 
-	COLOR_B_R=200
-	COLOR_B_G=100
-	COLOR_B_B=150
+	COLOR_B_R=0
+	COLOR_B_G=150
+	COLOR_B_B=220
 
-	COLOR_GIT_FG_R=20
-	COLOR_GIT_FG_G=20
-	COLOR_GIT_FG_B=20
+	COLOR_GIT_FG_R=00
+	COLOR_GIT_FG_G=00
+	COLOR_GIT_FG_B=00
 
-	COLOR_GIT_BG_R=150
-	COLOR_GIT_BG_G=150
-	COLOR_GIT_BG_B=200
+	COLOR_GIT_BG_R=250
+	COLOR_GIT_BG_G=120
+	COLOR_GIT_BG_B=20
 
 	COLOR_B_FG=$(fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
 	COLOR_B_BG=$(bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
@@ -92,9 +92,9 @@ fi
 
 success_symbol() {
 	if [[ "$?" == 0 ]]; then
-		echo -en "\[${COLOR_A_FG}\]✔"
+		echo -en "✔"
 	else
-		echo -en "\[${COLOR_A_FG}\]✖"
+		echo -en "✖"
 	fi
 }
 
@@ -104,7 +104,7 @@ parse_git_branch() {
 
 set_bash_prompt() {
 	#PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
-	PS1="\[${COLOR_B_BG}\] $(success_symbol)\[${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\] "
+	PS1="\[${COLOR_B_BG}${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\]\n$(success_symbol)\[${COLOR_RESET}\] "
 }
 
 if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then

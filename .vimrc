@@ -32,6 +32,7 @@ Plug 'scrooloose/nerdtree'
 
 " Base colors
 Plug 'dikiaap/minimalist'
+Plug 'crusoexia/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
 
@@ -44,21 +45,25 @@ let s:scheme = $EVERTRAS_SCREEN_MODE
 let s:transparency = $EVERTRAS_SCREEN_TRANSPARENCY
 
 if s:scheme == 'dark'
-	" Using minimalist as a base, but...
-	colorscheme minimalist
+	" Using monokai as a base, but...
+	colorscheme monokai
 
-	if s:transparency == 'true'
-		" ...we make some adjustments for slick transparency effects in iterm2
-		hi Normal       ctermbg=NONE
-		hi NonText      ctermbg=NONE
-		hi Comment      ctermfg=103   cterm=bold
-		hi NERDTreeFile ctermfg=244
-		hi LineNr       ctermbg=NONE
-		hi StatusLine   ctermbg=NONE  ctermfg=244
-		hi StatusLineNC ctermbg=NONE  ctermfg=240
-		hi VertSplit    ctermbg=NONE
-		hi SignColumn   ctermbg=NONE
-	endif
+	"if s:transparency == 'true'
+	" ...we make some adjustments
+	hi Normal       ctermbg=NONE
+	hi NonText      ctermbg=NONE
+	hi Comment      ctermfg=103   cterm=bold
+	hi NERDTreeFile ctermfg=103
+	hi NERDTreeExecFile ctermfg=202
+	hi NERDTreeDir  ctermfg=078   cterm=bold
+	hi LineNr       ctermbg=NONE
+	hi StatusLine   ctermbg=NONE  ctermfg=244
+	hi StatusLineNC ctermbg=NONE  ctermfg=240
+	hi VertSplit    ctermbg=NONE
+	hi SignColumn   ctermbg=NONE
+	hi Error        ctermfg=202
+	hi CocErrorFloat        ctermbg=202
+	"endif
 
 	" ...and some more interesting colors for git diffs
 	hi DiffAdd    ctermfg=112 ctermbg=NONE
@@ -130,6 +135,7 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 nnoremap <space> za
+nnoremap <leader>R :source ~/.vimrc<CR>
 
 " General settings
 set autoread
@@ -147,6 +153,8 @@ set splitbelow
 set splitright
 set colorcolumn=80
 set foldmethod=syntax
+" Makes the cursor start at the beginning of the line for tabs
+"set list listchars=tab:\ 
 
 " Our shell scripts are bash scripts, trust us
 let g:is_bash = 1
@@ -202,23 +210,29 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*\.'. a:extension .'$#'
 endfunction
 
-call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
-call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
-call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('yaml', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
-call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
-call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
-call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('ts', 'green', 'none', '#ffa500', '#151515')
-call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
-call NERDTreeHighlightFile('go', 'green', 'none', 'green', '#151515')
+if s:scheme == 'dark'
+	call NERDTreeHighlightFile('go', '171', 'none', '171', '#151515')
+	call NERDTreeHighlightFile('yaml', '220', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('yml', '220', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('sh', '202', 'none', '202', '#151515')
+	call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+else
+	" TODO: make this nicer, this is just the old defaults
+	call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
+	call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('yml', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('config', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('conf', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('json', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', '#151515')
+	call NERDTreeHighlightFile('styl', 'cyan', 'none', 'cyan', '#151515')
+	call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
+	call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
+	call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
+	call NERDTreeHighlightFile('ts', 'green', 'none', '#ffa500', '#151515')
+	call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+endif
 

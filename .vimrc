@@ -15,7 +15,10 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'airblade/vim-gitgutter'
 
 " Autocomplete stuff
-Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" GraphQL stuff
+Plug 'jparise/vim-graphql'
 
 " Typescript syntax stuff
 Plug 'leafgarland/typescript-vim'

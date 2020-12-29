@@ -140,6 +140,7 @@ alias mux='tmuxinator'
 # Some kubectl shortcuts
 alias usens='kubectl config set-context --current --namespace'
 alias usc='kubectl config use-context'
+alias k='kubectl'
 
 # Usage: up [n]
 #
@@ -187,6 +188,9 @@ export GPG_TTY="$(tty)"
 for SRCFILE in ~/.bashrc.d/*; do
 	source ${SRCFILE}
 done
+
+# Simple Makefile completion
+complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 
 ################################################################################
 ############################ END ###############################################

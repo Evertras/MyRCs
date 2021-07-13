@@ -145,6 +145,9 @@ alias usens='kubectl config set-context --current --namespace'
 alias usc='kubectl config use-context'
 alias k='kubectl'
 
+# The ultimate laziness
+alias m='make'
+
 # Usage: up [n]
 #
 # Example: 'up 3' goes up 3 directories
@@ -192,8 +195,29 @@ for SRCFILE in ~/.bashrc.d/*; do
 	source ${SRCFILE}
 done
 
+
 # Simple Makefile completion
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+
+function volumize() {
+	if [[ $# -ne 2 ]]; then
+		echo "Usage: volumize <dir> <volume-name>"
+		return 1
+	fi
+
+	VDIR=$1
+	VNAME=$2
+
+	echo "Putting directory $VDIR into volume $VNAME"
+
+	docker rm volumizer-helper || echo "^^^^ This is fine if it doesn't exist"
+	docker volume create ${VNAME}
+	docker create -v ${VNAME}:/data --name volumizer-helper busybox true
+	docker cp ${VDIR} volumizer-helper:/data
+	docker rm volumizer-helper
+
+	echo "Done!  Use volume '${VNAME}'"
+}
 
 ################################################################################
 ############################ END ###############################################

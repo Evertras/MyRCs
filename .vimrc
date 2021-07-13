@@ -27,6 +27,9 @@ Plug 'posva/vim-vue'
 " TOML stuff
 Plug 'cespare/vim-toml'
 
+" Hashicorp stuff
+Plug 'jvirtanen/vim-hcl'
+
 " FBS stuff
 Plug 'dcharbon/vim-flatbuffers'
 
@@ -46,6 +49,10 @@ call plug#end()
 " are defined in our .bashrc so we can also switch tmux
 let s:scheme = $EVERTRAS_SCREEN_MODE
 let s:transparency = $EVERTRAS_SCREEN_TRANSPARENCY
+
+if s:scheme == ''
+	let s:scheme = 'dark'
+endif
 
 if s:scheme == 'dark'
 	" Using monokai as a base, but...
@@ -199,7 +206,7 @@ let g:gitgutter_sign_modified_removed = '➟'
 
 " NERDTREE settings
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeIgnore = ['^node_modules$']
+let g:NERDTreeIgnore = ['^node_modules$', '.*\.retry$']
 
 " When we open vim, open it with Nerdtree if and only if we did 'vim .' (or
 " some directory)

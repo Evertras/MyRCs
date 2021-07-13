@@ -12,8 +12,8 @@ export TERM=xterm-256color
 export CLICOLOR=true
 
 # For vim/tmux colors... change this to switch between light/dark
-export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-light}
-export EVERTRAS_SCREEN_TRANSPARENCY=${EVERTRAS_SCREEN_TRANSPARENCY:-true}
+export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-dark}
+export EVERTRAS_SCREEN_TRANSPARENCY=${EVERTRAS_SCREEN_TRANSPARENCY:-false}
 export EVERTRAS_PROMPT_MODE=${EVERTRAS_PROMPT_MODE:-normal}
 
 COLOR_RESET="\033[0m"
@@ -122,6 +122,9 @@ fi
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
+
+# And colorize ls
+alias ls='ls --color'
 
 # Just use nvim
 alias vim=nvim

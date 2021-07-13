@@ -23,6 +23,7 @@ Plug 'jparise/vim-graphql'
 " Typescript syntax stuff
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
+Plug 'peitalin/vim-jsx-typescript'
 
 " TOML stuff
 Plug 'cespare/vim-toml'
@@ -32,6 +33,13 @@ Plug 'jvirtanen/vim-hcl'
 
 " FBS stuff
 Plug 'dcharbon/vim-flatbuffers'
+
+" Jsonnet stuff
+Plug 'google/vim-jsonnet'
+
+" Hashicorp stuff
+Plug 'hashivim/vim-hashicorp-tools'
+Plug 'jvirtanen/vim-hcl'
 
 " File tree
 Plug 'scrooloose/nerdtree'
@@ -195,6 +203,9 @@ nmap <silent> <leader>r <Plug>(coc-references)
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>F <Plug>(coc-format)
 nmap <leader>f <Plug>(coc-fix-current)
+
+" Typescript React files
+autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
 
 " GITGUTTER settings
 let g:gitgutter_override_sign_column_highlight = 0

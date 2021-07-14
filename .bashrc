@@ -2,14 +2,22 @@
 #PS4='+ $EPOCHREALTIME\011 '
 #set -x
 
+# We want to use the same bashrc between Mac and Linux, but there are some
+# differences based on where we're running, so figure out where we are
+HOST_OS=$(uname)
+
 ################################################################################
 ######################### PROMPT/THEME #########################################
 ################################################################################
 
 export TERM=xterm-256color
 
-# Adds color to ls (mac thing)
-export CLICOLOR=true
+# Add color to ls
+if [[ "${HOST_OS}" == "Darwin" ]]; then
+	export CLICOLOR=true
+else
+	alias ls='ls --color'
+fi
 
 # For vim/tmux colors... change this to switch between light/dark
 export EVERTRAS_SCREEN_MODE=${EVERTRAS_SCREEN_MODE:-dark}
@@ -122,9 +130,6 @@ fi
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
-# And colorize ls
-alias ls='ls --color'
 
 # Just use nvim
 alias vim=nvim

@@ -220,7 +220,7 @@ let g:gitgutter_sign_modified_removed = '➟'
 
 " NERDTREE settings
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeIgnore = ['^node_modules$', '.*\.retry$']
+let g:NERDTreeIgnore = ['^node_modules$', '.*\.retry$', '^bazel-']
 
 " When we open vim, open it with Nerdtree if and only if we did 'vim .' (or
 " some directory)

@@ -204,7 +204,7 @@ done
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 
 function checkpath() {
-	echo "${PATH}" | tr ":" "\n"
+	echo "${PATH}" | tr ":" "\n" | sort -u
 }
 
 function volumize() {

@@ -31,74 +31,74 @@ COLOR_SEA_GREEN="\033[38;5;42m"
 COLOR_ORANGE="\033[38;5;208m"
 COLOR_RED="\033[38;5;196m"
 
-fg_rgb() {
+everbash_fg_rgb() {
 	echo -ne "\033[38;2;${1};${2};${3}m"
 }
 
-bg_rgb() {
+everbash_bg_rgb() {
 	echo -ne "\033[48;2;${1};${2};${3}m"
 }
 
+everbash_prompt_colors() {
+	COLOR_A_R="${1}"
+	COLOR_A_G="${2}"
+	COLOR_A_B="${3}"
+
+	COLOR_B_R="${4}"
+	COLOR_B_G="${5}"
+	COLOR_B_B="${6}"
+
+	COLOR_GIT_FG_R="${7}"
+	COLOR_GIT_FG_G="${8}"
+	COLOR_GIT_FG_B="${9}"
+
+	COLOR_GIT_BG_R="${10}"
+	COLOR_GIT_BG_G="${11}"
+	COLOR_GIT_BG_B="${12}"
+}
+
 if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-	COLOR_A_R=0
-	COLOR_A_G=0
-	COLOR_A_B=0
 
-	COLOR_B_R=0
-	COLOR_B_G=150
-	COLOR_B_B=220
+	everbash_prompt_colors \
+		0 0 0 \
+		0 150 220 \
+		0 0 0 \
+		250 120 20
 
-	COLOR_GIT_FG_R=00
-	COLOR_GIT_FG_G=00
-	COLOR_GIT_FG_B=00
-
-	COLOR_GIT_BG_R=250
-	COLOR_GIT_BG_G=120
-	COLOR_GIT_BG_B=20
-
-	COLOR_B_FG=$(fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
-	COLOR_B_BG=$(bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
-	COLOR_A_FG=$(fg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
-	COLOR_A_BG=$(bg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
-	COLOR_GIT_FG=$(fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
-	COLOR_GIT_BG=$(bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
 elif [[ $EVERTRAS_SCREEN_MODE == neutral ]]; then
-	COLOR_A_R=20
-	COLOR_A_G=0
-	COLOR_A_B=0
 
-	COLOR_B_R=100
-	COLOR_B_G=200
-	COLOR_B_B=200
+	everbash_prompt_colors \
+		20 0 0 \
+		100 200 200 \
+		20 20 20 \
+		150 150 200
 
-	COLOR_GIT_FG_R=20
-	COLOR_GIT_FG_G=20
-	COLOR_GIT_FG_B=20
-
-	COLOR_GIT_BG_R=150
-	COLOR_GIT_BG_G=150
-	COLOR_GIT_BG_B=200
-
-	COLOR_B_FG=$(fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
-	COLOR_B_BG=$(bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
-	COLOR_A_FG=$(fg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
-	COLOR_A_BG=$(bg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
-	COLOR_GIT_FG=$(fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
-	COLOR_GIT_BG=$(bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
 else
-	COLOR_GIT_BG_R=150
-	COLOR_GIT_BG_G=150
-	COLOR_GIT_BG_B=200
 
-	COLOR_A_FG=$(fg_rgb 177 124 62)
-	COLOR_A_BG=$(bg_rgb 177 124 62)
-	COLOR_B_FG=$(fg_rgb 220 200 150)
-	COLOR_B_BG=$(bg_rgb 220 200 150)
-	COLOR_GIT_FG=$(fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
-	COLOR_GIT_BG=$(bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
+	everbash_prompt_colors \
+		177 124 62 \
+		220 200 150 \
+		150 150 200 \
+		150 150 200
+
 fi
 
-success_symbol() {
+EVERTRAS_THEME=forest
+
+EVERTRAS_THEME_FILE=~/.bashrc.d/themes/${EVERTRAS_THEME}.sh
+
+if [[ -f "${EVERTRAS_THEME_FILE}" ]]; then
+	source "${EVERTRAS_THEME_FILE}"
+fi
+
+COLOR_B_FG=$(everbash_fg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
+COLOR_B_BG=$(everbash_bg_rgb ${COLOR_B_R} ${COLOR_B_G} ${COLOR_B_B})
+COLOR_A_FG=$(everbash_fg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
+COLOR_A_BG=$(everbash_bg_rgb ${COLOR_A_R} ${COLOR_A_G} ${COLOR_A_B})
+COLOR_GIT_FG=$(everbash_fg_rgb ${COLOR_GIT_FG_R} ${COLOR_GIT_FG_G} ${COLOR_GIT_FG_B})
+COLOR_GIT_BG=$(everbash_bg_rgb ${COLOR_GIT_BG_R} ${COLOR_GIT_BG_G} ${COLOR_GIT_BG_B})
+
+everbash_success_symbol() {
 	if [[ "$?" == 0 ]]; then
 		echo -en "✔"
 	else
@@ -110,15 +110,14 @@ parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1 /'
 }
 
-set_bash_prompt() {
-	#PS1="\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_B_BG}\]$(success_symbol)\[${COLOR_A_FG}\]    \w$(parse_git_branch)\[${COLOR_B_FG}${COLOR_RESET_BG}\]\[${COLOR_RESET}\] "
-	PS1="\[${COLOR_B_BG}${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\]\n$(success_symbol)\[${COLOR_RESET}\] "
+everbash_set_bash_prompt() {
+	PS1="\[${COLOR_B_BG}${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\]\n$(everbash_success_symbol)\[${COLOR_RESET}\] "
 }
 
 if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
 	PS1="\[${COLOR_B_FG}\]\w \[${COLOR_B_FG}\]$\[${COLOR_RESET}\] "
 else
-	PROMPT_COMMAND=set_bash_prompt
+	PROMPT_COMMAND=everbash_set_bash_prompt
 fi
 
 
@@ -147,7 +146,6 @@ alias mux='tmuxinator'
 
 # Some kubectl shortcuts
 alias usens='kubectl config set-context --current --namespace'
-alias usc='kubectl config use-context'
 alias k='kubectl'
 
 # The ultimate laziness
@@ -197,9 +195,10 @@ export GPG_TTY="$(tty)"
 
 # Machine-specific bash stuff should go in this directory
 for SRCFILE in ~/.bashrc.d/*; do
-	source ${SRCFILE}
+	if [[ -f ${SRCFILE} ]]; then
+		source ${SRCFILE}
+	fi
 done
-
 
 # Simple Makefile completion
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make

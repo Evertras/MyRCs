@@ -203,6 +203,10 @@ done
 # Simple Makefile completion
 complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
 
+function checkpath() {
+	echo "${PATH}" | tr ":" "\n"
+}
+
 function volumize() {
 	if [[ $# -ne 2 ]]; then
 		echo "Usage: volumize <dir> <volume-name>"

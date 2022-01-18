@@ -187,6 +187,9 @@ autocmd FileType * normal zR
 " Make vim check if it needs to reload with autoread
 au FocusGained,BufEnter * :checktime
 
+" Correctly wrap at 80 characters for Markdown reformatting
+au BufRead,BufNewFile *.md setlocal textwidth=80
+
 " Tab navigates popup menus
 imap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"

@@ -180,8 +180,8 @@ shopt -s checkwinsize
 # Append to history per-command rather than waiting for shell to exit
 shopt -s histappend
 
-# Don't show control characters
-stty -echoctl
+# Don't show control characters (for interactive shells only)
+[[ $- == *i* ]] && stty -echoctl
 
 # Use nvim for all our editing needs
 export EDITOR=nvim

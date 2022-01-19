@@ -50,14 +50,18 @@ Plug 'jvirtanen/vim-hcl'
 " File tree
 Plug 'scrooloose/nerdtree'
 
+" Dart stuff
+Plug 'dart-lang/dart-vim-plugin'
+
+" Bazel stuff
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
+
 " Base colors
 Plug 'dikiaap/minimalist'
 Plug 'crusoexia/vim-monokai'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'altercation/vim-colors-solarized'
-
-" Dart stuff
-Plug 'dart-lang/dart-vim-plugin'
 
 call plug#end()
 " /PLUGINS

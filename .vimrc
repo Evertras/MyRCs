@@ -28,9 +28,6 @@ Plug 'peitalin/vim-jsx-typescript'
 " TOML stuff
 Plug 'cespare/vim-toml'
 
-" Hashicorp stuff
-Plug 'jvirtanen/vim-hcl'
-
 " FBS stuff
 Plug 'dcharbon/vim-flatbuffers'
 
@@ -40,6 +37,12 @@ Plug 'google/vim-jsonnet'
 " Hashicorp stuff
 Plug 'hashivim/vim-hashicorp-tools'
 Plug 'jvirtanen/vim-hcl'
+
+" Markdown folding
+Plug 'masukomi/vim-markdown-folding'
+
+" Glow preview
+Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
 
 " File tree
 Plug 'scrooloose/nerdtree'
@@ -177,8 +180,13 @@ set foldmethod=syntax
 " Our shell scripts are bash scripts, trust us
 let g:is_bash = 1
 
+" Use nested folding with vim-markdown-folding plugin
+autocmd FileType markdown set foldexpr=NestedMarkdownFolds()
+
 " Stop adding new comment starts on newlines
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Open all folds
 autocmd FileType * normal zR
 
 " Don't use relative paths for files

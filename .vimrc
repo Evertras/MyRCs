@@ -60,6 +60,9 @@ Plug 'dart-lang/dart-vim-plugin'
 Plug 'google/vim-maktaba'
 Plug 'bazelbuild/vim-bazel'
 
+" Delve stuff
+Plug 'sebdah/vim-delve'
+
 " Base colors
 Plug 'dikiaap/minimalist'
 Plug 'crusoexia/vim-monokai'
@@ -181,12 +184,13 @@ set wildmode=longest,list
 set noshowmode
 set shortmess+=c
 filetype plugin indent on
-set tabstop=4
 set shiftwidth=4
 set splitbelow
 set splitright
 set colorcolumn=80
 set foldmethod=syntax
+set tabstop=4
+set expandtab
 " Makes the cursor start at the beginning of the line for tabs
 "set list listchars=tab:\ 
 

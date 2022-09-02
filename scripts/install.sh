@@ -26,3 +26,7 @@ for SRCFILE in ./.bashrc.d/themes/*; do
 	fi
 done
 
+# Helix .config
+mkdir -p ~/.config/helix/
+
+ln -s $(pwd)/etc/helix/config.toml ${HOME}/.config/helix/config.toml

@@ -2,10 +2,12 @@ theme = "everforest_dark"
 
 [editor]
 auto-pairs = false
+idle-timeout = 0
 line-number = "relative"
 mouse = false
 rulers = [80]
 # For 22.08 and above...
+color-modes = true
 cursorline = true
 
 [editor.cursor-shape]
@@ -23,7 +25,7 @@ render = "all"
 [keys.normal]
 "$" = "goto_line_end"
 "0" = "goto_line_start"
-"," = { d = "goto_definition"}
+"," = { d = "goto_definition", i = "goto_implementation" }
 ";" = "command_mode"
 
 [keys.insert]

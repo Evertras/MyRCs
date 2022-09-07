@@ -24,6 +24,7 @@ render = "all"
 "$" = "goto_line_end"
 "0" = "goto_line_start"
 "," = { d = "goto_definition"}
+";" = "command_mode"
 
 [keys.insert]
 j = { k = "normal_mode" }

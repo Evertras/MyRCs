@@ -63,6 +63,11 @@ Plug 'bazelbuild/vim-bazel'
 " Delve stuff
 Plug 'sebdah/vim-delve'
 
+" PlantUML stuff
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
+Plug 'aklt/plantuml-syntax'
+
 " Base colors
 Plug 'dikiaap/minimalist'
 Plug 'crusoexia/vim-monokai'

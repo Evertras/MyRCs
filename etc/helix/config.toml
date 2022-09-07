@@ -6,7 +6,7 @@ line-number = "relative"
 mouse = false
 rulers = [80]
 # For 22.08 and above...
-#cursorline = true
+cursorline = true
 
 [editor.cursor-shape]
 insert = "bar"

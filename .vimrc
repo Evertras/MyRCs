@@ -47,9 +47,6 @@ Plug 'jvirtanen/vim-hcl'
 " Markdown folding
 Plug 'masukomi/vim-markdown-folding'
 
-" Glow preview
-Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
-
 " File tree
 Plug 'scrooloose/nerdtree'
 
@@ -236,6 +233,8 @@ nmap <silent> <leader>r <Plug>(coc-references)
 nmap <silent> <leader>o :<C-u>CocList outline<cr>
 nmap <silent> <leader>F <Plug>(coc-format)
 nmap <leader>f <Plug>(coc-fix-current)
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#_select_confirm()
+				\: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Typescript React files
 autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact

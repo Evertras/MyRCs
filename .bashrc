@@ -151,6 +151,9 @@ alias k='kubectl'
 # The ultimate laziness
 alias m='make'
 
+# Fix keyboard layout in Linux (harmless in Mac, so fine in here)
+alias fixkeyboard='setxkbmap -layout us'
+
 # Usage: up [n]
 #
 # Example: 'up 3' goes up 3 directories

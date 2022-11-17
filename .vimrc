@@ -193,6 +193,7 @@ set colorcolumn=80
 set foldmethod=syntax
 set tabstop=4
 set expandtab
+set mouse=
 " Makes the cursor start at the beginning of the line for tabs
 "set list listchars=tab:\ 
 

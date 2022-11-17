@@ -27,7 +27,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jparise/vim-graphql'
 
 " Typescript syntax stuff
-Plug 'leafgarland/typescript-vim'
+"Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'peitalin/vim-jsx-typescript'
 
@@ -89,19 +89,19 @@ if s:scheme == 'dark'
 
 	"if s:transparency == 'true'
 	" ...we make some adjustments
-	hi Normal       ctermbg=NONE
-	hi NonText      ctermbg=NONE
-	hi Comment      ctermfg=103   cterm=bold
-	hi NERDTreeFile ctermfg=103
+	hi Normal        ctermbg=NONE
+	hi NonText       ctermbg=NONE
+	hi Comment       ctermfg=103   cterm=bold
+	hi NERDTreeFile  ctermfg=103
 	hi NERDTreeExecFile ctermfg=202
-	hi NERDTreeDir  ctermfg=078   cterm=bold
-	hi LineNr       ctermbg=NONE
-	hi StatusLine   ctermbg=NONE  ctermfg=244
-	hi StatusLineNC ctermbg=NONE  ctermfg=240
-	hi VertSplit    ctermbg=NONE
-	hi SignColumn   ctermbg=NONE
-	hi Error        ctermfg=202
-	hi CocErrorFloat        ctermbg=202
+	hi NERDTreeDir   ctermfg=078   cterm=bold
+	hi LineNr        ctermbg=NONE
+	hi StatusLine    ctermbg=NONE  ctermfg=244
+	hi StatusLineNC  ctermbg=NONE  ctermfg=240
+	hi VertSplit     ctermbg=NONE
+	hi SignColumn    ctermbg=NONE
+	hi Error         ctermfg=202
+	hi CocErrorFloat ctermfg=252 ctermbg=202
 	"endif
 
 	" ...and some more interesting colors for git diffs

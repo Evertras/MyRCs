@@ -224,7 +224,7 @@ imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
 " EASYMOTION settings
 let g:EasyMotion_do_mapping = 0
-nmap ' <Plug>(easymotion-overwin-f)
+nmap <leader>a <Plug>(easymotion-overwin-f)
 
 " COC settings
 nmap <silent> <leader>d <Plug>(coc-definition)

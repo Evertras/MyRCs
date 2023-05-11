@@ -186,6 +186,7 @@ set wildmode=longest,list
 set noshowmode
 set shortmess+=c
 filetype plugin indent on
+set scrolloff=8
 set shiftwidth=4
 set splitbelow
 set splitright

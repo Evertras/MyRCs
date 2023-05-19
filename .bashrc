@@ -230,6 +230,44 @@ function volumize() {
 	echo "Done!  Use volume '${VNAME}'"
 }
 
+function host() {
+  if [[ $# -ne 3 ]]; then
+    echo "Usage: host <dir> <hostname> <port>"
+    return 1
+  fi
+
+  EVERTRAS_HOST_DIR=$1
+  EVERTRAS_HOST_NAME=$2
+  EVERTRAS_HOST_PORT=$3
+
+  echo "Hosting directory ${EVERTRAS_HOST_DIR} on http://${EVERTRAS_HOST_NAME}:${EVERTRAS_HOST_PORT}"
+
+  docker run --rm -it \
+    -v ${EVERTRAS_HOST_DIR}:/usr/share/nginx/html \
+    -e NGINX_HOST=${EVERTRAS_HOST_NAME} \
+    -p ${EVERTRAS_HOST_PORT}:80 \
+    nginx:1.23-alpine
+}
+
+function hostfileindex() {
+  if [[ $# -ne 3 ]]; then
+    echo "Usage: hostfileindex <file> <hostname> <port>"
+    return 1
+  fi
+
+  EVERTRAS_HOST_DIR=$1
+  EVERTRAS_HOST_NAME=$2
+  EVERTRAS_HOST_PORT=$3
+
+  echo "Hosting file ${EVERTRAS_HOST_DIR} on http://${EVERTRAS_HOST_NAME}:${EVERTRAS_HOST_PORT}"
+
+  docker run --rm -it \
+    -v ${EVERTRAS_HOST_DIR}:/usr/share/nginx/html/index.html \
+    -e NGINX_HOST=${EVERTRAS_HOST_NAME} \
+    -p ${EVERTRAS_HOST_PORT}:80 \
+    nginx:1.23-alpine
+}
+
 ################################################################################
 ############################ END ###############################################
 ################################################################################

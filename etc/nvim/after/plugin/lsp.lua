@@ -1,6 +1,6 @@
-local lsp = require('lsp-zero').preset("recommended")
+local lsp = require('lsp-zero').preset({})
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 
   local opts = {buffer = bufnr, remap = false}

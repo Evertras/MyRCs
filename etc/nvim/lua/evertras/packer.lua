@@ -33,6 +33,10 @@ return require('packer').startup(function(use)
       ts_update()
     end,
   }
+  use 'nvim-treesitter/playground'
+
+  -- https://github.com/mbbill/undotree
+  use 'mbbill/undotree'
 
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins

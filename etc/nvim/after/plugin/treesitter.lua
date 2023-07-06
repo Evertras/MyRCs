@@ -4,6 +4,7 @@ require'nvim-treesitter.configs'.setup {
     "c",
     "javascript",
     "typescript",
+    "go",
     "lua",
     "vim",
     "vimdoc",

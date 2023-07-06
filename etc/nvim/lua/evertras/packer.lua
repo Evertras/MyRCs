@@ -14,9 +14,24 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
+  -- https://github.com/nvim-telescope/telescope.nvim
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
     requires = { {'nvim-lua/plenary.nvim'} }
+  }
+
+  -- For more color repo options:
+  -- https://github.com/topics/neovim-colorscheme
+  use { "catppuccin/nvim", as = "catppuccin" }
+  use "folke/tokyonight.nvim"
+
+  -- https://github.com/nvim-treesitter/nvim-treesitter
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
   }
 
   -- Automatically set up configuration after cloning packer.nvim

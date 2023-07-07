@@ -60,6 +60,12 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- https://github.com/nvim-lualine/lualine.nvim
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
 	use 'lewis6991/gitsigns.nvim'
 
   use 'nvim-tree/nvim-tree.lua'

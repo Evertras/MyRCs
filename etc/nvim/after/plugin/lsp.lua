@@ -5,10 +5,10 @@ lsp.on_attach(function(_, bufnr)
 
   local opts = {buffer = bufnr, remap = false}
 
-  vim.keymap.set('n', '<leader>d', function() vim.lsp.buf.definition() end, opts)
-  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-  vim.keymap.set('n', '<leader>r', function() vim.lsp.buf.references() end, opts)
-  vim.keymap.set('n', '<leader>h', function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, opts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+  vim.keymap.set('n', '<leader>r', vim.lsp.buf.references, opts)
+  vim.keymap.set('n', '<leader>h', vim.lsp.buf.signature_help, opts)
 end)
 
 -- (Optional) Configure lua language server for neovim

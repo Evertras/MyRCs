@@ -62,12 +62,8 @@ return require('packer').startup(function(use)
 
 	use 'lewis6991/gitsigns.nvim'
 
-  --use 'nvim-tree/nvim-tree.lua'
-  --use 'nvim-tree/nvim-web-devicons'
-  use {
-    'ms-jpq/chadtree',
-    run = 'python3 -m chadtree deps',
-  }
+  use 'nvim-tree/nvim-tree.lua'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins

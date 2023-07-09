@@ -15,3 +15,6 @@ vim.opt.signcolumn = 'yes'
 vim.opt.incsearch = true
 
 vim.opt.mouse = ''
+
+vim.opt.splitright = true
+vim.opt.splitbelow = true

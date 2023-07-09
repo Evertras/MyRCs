@@ -12,7 +12,7 @@ local function custom_attach(bufnr)
   vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Up'))
   vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
   vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical split'))
-  vim.keymap.set('n', 'h', api.node.open.horizontal, opts('Open: Horizontal split'))
+  vim.keymap.set('n', 'i', api.node.open.horizontal, opts('Open: Horizontal split'))
 end
 
 require("nvim-tree").setup({

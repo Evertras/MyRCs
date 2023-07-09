@@ -17,6 +17,18 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
 
+-- Tweak cmp
+local cmp = require('cmp')
+
+cmp.setup({
+  sources = {
+    { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'nvim_lsp_signature_help' },
+    { name = 'buffer',                 keyword_length = 3 },
+  },
+})
+
 -- Enable quickfixes
 local function quickfix()
   vim.lsp.buf.code_action({
@@ -30,3 +42,6 @@ local function quickfix()
 end
 
 vim.keymap.set('n', '<leader>f', quickfix)
+
+-- Autoformat on save
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]

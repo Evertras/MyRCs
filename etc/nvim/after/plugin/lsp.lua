@@ -16,3 +16,17 @@ end)
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
+
+-- Enable quickfixes
+local function quickfix()
+  vim.lsp.buf.code_action({
+    -- This is supposed to autoselect the desired fix, but this doesn't
+    -- seem to work properly in Go for pulling in imports... leaving
+    -- it here for reference to see if I can get it to work better in
+    -- the future
+    --filter = function(a) return a.isPreferred end,
+    apply = true
+  })
+end
+
+vim.keymap.set('n', '<leader>f', quickfix)

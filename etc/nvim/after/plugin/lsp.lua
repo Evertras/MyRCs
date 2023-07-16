@@ -17,6 +17,16 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
 lsp.setup()
 
+-- Add Terraform LSP
+-- https://github.com/hashicorp/terraform-ls/blob/main/docs/installation.md
+require('lspconfig.configs').terraform = {
+  default_config = {
+    name = 'terraform',
+    cmd = { 'terraform-ls' },
+    filetypes = { 'tf' },
+  }
+}
+
 -- Tweak cmp
 local cmp = require('cmp')
 

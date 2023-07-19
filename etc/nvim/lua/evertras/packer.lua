@@ -14,6 +14,7 @@ local packer_bootstrap = ensure_packer()
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
+  -- Fuzzy finder
   -- https://github.com/nvim-telescope/telescope.nvim
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
@@ -25,6 +26,7 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
   use "folke/tokyonight.nvim"
 
+  -- For
   -- https://github.com/nvim-treesitter/nvim-treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -62,14 +64,17 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- Status line at the bottom
   -- https://github.com/nvim-lualine/lualine.nvim
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
 
+  -- Shows a git gutter on the left for changes
   use 'lewis6991/gitsigns.nvim'
 
+  -- File explorer/tree
   use 'nvim-tree/nvim-tree.lua'
   use 'nvim-tree/nvim-web-devicons'
 

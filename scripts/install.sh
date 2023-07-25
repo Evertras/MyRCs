@@ -48,3 +48,14 @@ linkconfig helix/config.toml
 linkconfig nvim/init.lua
 linkconfig nvim/lua/evertras
 linkconfig nvim/after/plugin
+
+# Alacritty .config
+linkconfig alacritty/base.yml
+linkconfig alacritty/mode-demo.base.yml
+touch ~/.config/alacritty/override.yml
+linkconfig alacritty/alacritty.yml
+
+if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
+  echo "Copying Alacritty mode-demo.base.yml into mode-demo.yml"
+  cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
+fi

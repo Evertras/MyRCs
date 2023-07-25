@@ -268,6 +268,14 @@ function hostfileindex() {
     nginx:1.23-alpine
 }
 
+function terminal-mode-normal() {
+  echo -n "" > ~/.config/alacritty/demo-override.yml
+}
+
+function terminal-mode-demo() {
+  cp ~/.config/alacritty/mode-demo.yml ~/.config/alacritty/demo-override.yml
+}
+
 ################################################################################
 ############################ END ###############################################
 ################################################################################

@@ -1,0 +1,14 @@
+# This is copied over once.  The actual values will depend on the machine
+# they're being run on, such as different fonts, sizes, etc.
+#
+# If you are looking at mode-demo.yml, feel free to edit for local machine
+# changes.  If you are looking at mode-demo.base.yml, be careful.
+#
+# The install script will copy this file initially, then not touch it to
+# allow for local changes to persist safely.  To reset fresh, remove
+# ~/.config/alacritty/mode-demo.yml and run the install script again.
+window:
+  opacity: 1.0
+
+font:
+  size: 18.0

@@ -21,3 +21,6 @@ vim.opt.splitbelow = true
 
 -- Don't automatically create comment leads on new lines after a comment
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")
+
+-- .nomad files are HCL
+vim.cmd("autocmd BufEnter *.nomad set filetype=hcl")

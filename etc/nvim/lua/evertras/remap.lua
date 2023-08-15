@@ -14,3 +14,6 @@ vim.keymap.set("n", "<C-L>", "<C-W><C-L>")
 
 -- Clear search
 vim.keymap.set("n", "<leader><space>", vim.cmd.nohlsearch)
+
+-- Folding
+vim.keymap.set("n", "<space>", "za")

@@ -24,3 +24,9 @@ vim.cmd("autocmd BufEnter * set formatoptions-=cro")
 
 -- .nomad files are HCL
 vim.cmd("autocmd BufEnter *.nomad set filetype=hcl")
+
+-- Folding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.cmd("autocmd BufReadPost,FileReadPost * normal zR")

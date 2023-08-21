@@ -27,6 +27,35 @@ require('lspconfig.configs').terraform = {
   }
 }
 
+-- Add JSON/YAML schemas
+require('lspconfig').jsonls.setup {
+  settings = {
+    json = {
+      schemas = {
+        {
+          description = 'Prettier config',
+          fileMatch = { '.prettierrc', '.prettierrc.json', 'prettier.config.json' },
+          url = 'http://json.schemastore.org/prettierrc'
+        },
+      }
+    },
+  }
+}
+
+require('lspconfig').yamlls.setup {
+  settings = {
+    yaml = {
+      schemaStore = {
+        enable = false,
+        url = "",
+      },
+      schemas = require('schemastore').yaml.schemas(),
+      --['http://json.schemastore.org/github-workflow'] = '.github/workflows/*.{yml,yaml}',
+      --['https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.json'] = 'specs/*.{yml,yaml}',
+    }
+  }
+}
+
 -- Tweak cmp
 local cmp = require('cmp')
 
@@ -36,6 +65,9 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'buffer',                 keyword_length = 3 },
+  },
+  mapping = {
+    ['C-e'] = cmp.mapping.complete(),
   },
 })
 

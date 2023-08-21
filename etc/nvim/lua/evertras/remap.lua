@@ -17,3 +17,4 @@ vim.keymap.set("n", "<leader><space>", vim.cmd.nohlsearch)
 
 -- Folding
 vim.keymap.set("n", "<space>", "za")
+vim.keymap.set("n", "zz", "zR")

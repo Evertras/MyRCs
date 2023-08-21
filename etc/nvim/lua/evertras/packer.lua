@@ -26,7 +26,7 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
   use "folke/tokyonight.nvim"
 
-  -- For
+  -- For syntax highlighting
   -- https://github.com/nvim-treesitter/nvim-treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
@@ -63,6 +63,10 @@ return require('packer').startup(function(use)
       { 'L3MON4D3/LuaSnip' },                    -- Required
     }
   }
+
+  -- JSON/YAML schema support
+  -- https://github.com/b0o/SchemaStore.nvim
+  use 'b0o/schemastore.nvim'
 
   -- Status line at the bottom
   -- https://github.com/nvim-lualine/lualine.nvim

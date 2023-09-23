@@ -85,6 +85,9 @@ return require('packer').startup(function(use)
   -- Highlight characters to jump to in line
   use 'unblevable/quick-scope'
 
+  -- Copilot (personal)
+  use 'github/copilot.vim'
+
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

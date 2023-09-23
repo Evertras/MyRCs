@@ -276,6 +276,13 @@ function terminal-mode-demo() {
   cp ~/.config/alacritty/mode-demo.yml ~/.config/alacritty/demo-override.yml
 }
 
+function git-merged() {
+  branch=$(git rev-parse --abbrev-ref HEAD)
+  git checkout main
+  git pull
+  git branch -d "${branch}"
+}
+
 ################################################################################
 ############################ END ###############################################
 ################################################################################

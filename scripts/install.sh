@@ -33,6 +33,14 @@ link .vimrc
 
 mkdir -p ~/.bashrc.d/themes
 
+# Sample tmux config
+if ! [[ -f ~/.tmux.local.conf ]]; then
+  echo "# Custom tmux settings for this machine.  Example:
+
+# Use homebrew's bash
+#set -g default-shell /usr/local/bin/bash" > ~/.tmux.local.conf
+fi
+
 # Link all our themes
 for SRCFILE in ./.bashrc.d/themes/*; do
 	if [[ -f ${SRCFILE} ]]; then

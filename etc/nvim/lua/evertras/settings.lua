@@ -29,4 +29,5 @@ vim.cmd("autocmd BufEnter *.nomad set filetype=hcl")
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
-vim.cmd("autocmd BufReadPost,FileReadPost * normal zR")
+-- Start unfolded
+vim.cmd("autocmd BufEnter,Syntax * normal zz")

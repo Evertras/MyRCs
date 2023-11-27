@@ -88,6 +88,9 @@ return require('packer').startup(function(use)
   -- Copilot (personal)
   use 'github/copilot.vim'
 
+  use 'mfussenegger/nvim-dap'
+  use 'leoluz/nvim-dap-go'
+
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

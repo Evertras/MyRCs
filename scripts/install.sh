@@ -77,7 +77,7 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
-    read -s -p "Password: " password
+    read -s -p "Set evertras password: " password
     echo ""
     hashed=$(mkpasswd "${password}")
     echo "{

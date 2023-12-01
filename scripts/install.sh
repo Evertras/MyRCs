@@ -77,9 +77,9 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
-    echo "Enter password: "
-    read -s password
-    hashed=$(mkpasswod "${password}")
+    read -s -p "Password:" password
+    echo ""
+    hashed=$(mkpasswd "${password}")
     sudo echo "{
   passwords = {
     evertras = "'"'"${hashed}"'"'";

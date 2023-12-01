@@ -68,15 +68,17 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
   cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 fi
 
-if [ -f /etc/nix/configuration.nix ] && [ ! -L /etc/nix/configuration.nix ]; then
-  read -p "Link nix configuration to /etc/nix/configuration.nix? [y/n] " -n 1 -r
+nixos_config_file=/etc/nix/configuration.nix
+
+if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}"]; then
+  read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
     echo "Backing up old configuration.nix to /etc/nix/old-config.nix"
-    sudo cp /etc/nix/configuration.nix /etc/nix/old-config.nix
-    echo "Linking ./nix/configuration.nix -> /etc/nix/configuration.nix"
-    sudo rm /etc/nix/configuration.nix
-    sudo ln -s ./nix/configuration.nix /etc/nix/configuration.nix
+    sudo cp "${nixos_config_file}" /etc/nix/old-config.nix
+    echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
+    sudo rm "${nixos_config_file}"
+    sudo ln -s ./nix/configuration.nix "${nixos_config_file}"
   fi
 fi

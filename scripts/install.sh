@@ -84,7 +84,7 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   passwords = {
     evertras = "'"'"${hashed}"'"'";
   };
-}" | sudo tee /etc/nixos/passwords.nix
+}" > ./nix/passwords.nix
     echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
     sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"

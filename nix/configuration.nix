@@ -2,13 +2,13 @@
 { config, pkgs, ... }:
 
 let
-  passwords = (import /etc/nixos/passwords.nix).passwords;
+  passwords = (import ./passwords.nix).passwords;
 in
 {
   imports =
     [
       # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   environment.systemPackages = [

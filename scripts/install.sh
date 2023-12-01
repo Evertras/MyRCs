@@ -72,7 +72,7 @@ fi
 
 nixos_config_file=/etc/nixos/configuration.nix
 
-if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}"]; then
+if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r
   echo ""
 

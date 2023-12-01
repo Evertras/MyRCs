@@ -67,3 +67,16 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
   echo "Copying Alacritty mode-demo.base.yml into mode-demo.yml"
   cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 fi
+
+if [ -f /etc/nix/configuration.nix ] && [ ! -L /etc/nix/configuration.nix ]; then
+  read -p "Link nix configuration to /etc/nix/configuration.nix? [y/n] " -n 1 -r
+  echo ""
+
+  if [[ ! REPLY =~ ^[Yy]$ ]]; then
+    echo "Backing up old configuration.nix to /etc/nix/old-config.nix"
+    sudo cp /etc/nix/configuration.nix /etc/nix/old-config.nix
+    echo "Linking ./nix/configuration.nix -> /etc/nix/configuration.nix"
+    sudo rm /etc/nix/configuration.nix
+    sudo ln -s ./nix/configuration.nix /etc/nix/configuration.nix
+  fi
+fi

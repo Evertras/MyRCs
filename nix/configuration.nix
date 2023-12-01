@@ -14,6 +14,8 @@ in
   environment.systemPackages = [
     pkgs.git
     pkgs.neovim
+    pkgs.tldr
+    pkgs.starship
   ];
 
   # To run in Virtualbox

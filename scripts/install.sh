@@ -75,8 +75,16 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}"]; then
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
-    echo "Backing up old configuration.nix to /etc/nix/old-config.nix"
-    sudo cp "${nixos_config_file}" /etc/nix/old-config.nix
+    echo "Enter password: "
+    read -s password
+    hashed=$(mkpasswod "${password}")
+    sudo echo "{
+  passwords = {
+    evertras = "'"'"${hashed}"'"'";
+  };
+}" > /etc/nixos/passwords.nix
+    echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
+    sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
     sudo rm "${nixos_config_file}"
     sudo ln -s ./nix/configuration.nix "${nixos_config_file}"

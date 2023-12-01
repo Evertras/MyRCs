@@ -1,6 +1,9 @@
 # Sample config that was usable in virtualbox, for reference
 { config, pkgs, ... }:
 
+let
+  passwords = (import /etc/nixos/passwords.nix).passwords;
+in
 {
   imports =
     [
@@ -44,12 +47,12 @@
   users.users.evertras = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    # TODO: Handle this better?
-    #hashedPassword = "<something from mkpasswd here>";
+    hashedPassword = passwords.evertras;
     openssh = {
       authorizedKeys = {
-        # Insert public SSH key here
-        keys = [ ];
+        keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFNyVL/vIMAq56zRxCStyWzv+/82zBQjF6jBedkEvekb"
+        ];
       };
     };
     #packages = with pkgs; [];

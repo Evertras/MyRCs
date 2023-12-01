@@ -51,7 +51,7 @@
   users.users.evertras = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPasswordFile = "/etc/nixos/passwords/evertras";
+    passwordFile = "/etc/nixos/passwords/evertras";
     openssh = {
       authorizedKeys = {
         keys = [

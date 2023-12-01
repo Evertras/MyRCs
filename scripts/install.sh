@@ -70,7 +70,7 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
   cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 fi
 
-nixos_config_file=/etc/nix/configuration.nix
+nixos_config_file=/etc/nixos/configuration.nix
 
 if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}"]; then
   read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r

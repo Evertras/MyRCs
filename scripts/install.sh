@@ -89,6 +89,6 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
     sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
     sudo rm "${nixos_config_file}"
-    sudo ln -s ./nix/configuration.nix "${nixos_config_file}"
+    sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
   fi
 fi

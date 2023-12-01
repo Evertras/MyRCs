@@ -1,9 +1,11 @@
 # Sample config that was usable in virtualbox, for reference
 { config, pkgs, ... }:
 
-let
-  passwords = (import ./passwords.nix).passwords;
-in
+# Old way that I tried first, keeping for learning nix language
+#let
+#  passwords = (import ./passwords.nix).passwords;
+#in
+
 {
   imports =
     [
@@ -49,7 +51,7 @@ in
   users.users.evertras = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    hashedPassword = passwords.evertras;
+    hashedPasswordFile = "/etc/nixos/passwords/evertras";
     openssh = {
       authorizedKeys = {
         keys = [
@@ -82,7 +84,6 @@ in
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  # Enable OpenSSH so we don't have to use virtualbox UI
   services.sshd.enable = true;
 }
 

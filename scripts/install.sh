@@ -77,14 +77,11 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
+    sudo mkdir -p /etc/nixos/passwords/
     read -s -p "Set evertras password: " password
     echo ""
-    hashed=$(mkpasswd "${password}")
-    echo "{
-  passwords = {
-    evertras = "'"'"${hashed}"'"'";
-  };
-}" > ./nix/passwords.nix
+    mkpasswd "${password}" | sudo tee /etc/nixos/evertras
+    sudo chmod 0700 /etc/nixos/evertras
     echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
     sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"

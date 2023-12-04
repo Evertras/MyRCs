@@ -14,6 +14,7 @@
     ];
 
   environment.systemPackages = [
+    pkgs.docker
     pkgs.git
     pkgs.neovim
     pkgs.tldr

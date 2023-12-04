@@ -14,7 +14,6 @@
     ];
 
   environment.systemPackages = [
-    pkgs.docker
     pkgs.git
     pkgs.neovim
     pkgs.tldr
@@ -27,6 +26,10 @@
   boot.loader.timeout = 2;
 
   virtualisation.virtualbox.guest.enable = true;
+
+  virtualisation.docker = {
+    enable = true;
+  };
 
   # Apparently we need to do this?
   boot.initrd.checkJournalingFS = false;
@@ -51,7 +54,10 @@
   users.mutableUsers = false;
   users.users.evertras = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [
+      "docker"
+      "wheel"
+    ];
     passwordFile = "/etc/nixos/passwords/evertras";
     openssh = {
       authorizedKeys = {

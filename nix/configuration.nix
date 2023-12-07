@@ -21,7 +21,6 @@
   environment.systemPackages = [
     pkgs.gcc
     pkgs.git
-    pkgs.gnupg
     pkgs.neovim
     pkgs.pinentry
     pkgs.tldr
@@ -86,11 +85,7 @@
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  #programs.mtr.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -114,5 +109,13 @@
       KbdInteractiveAuthentication = false;
       X11Forwarding = true;
     };
+  };
+
+  services.pcscd.enable = true;
+
+  programs.gnupg.agent = {
+    enable = true;
+    pinentryFlavor = "curses";
+    enableSSHSupport = true;
   };
 }

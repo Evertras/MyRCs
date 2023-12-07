@@ -25,6 +25,10 @@
     pkgs.starship
   ];
 
+  environment.variables = {
+    EDITOR = "nvim";
+  };
+
   # To run in Virtualbox
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;

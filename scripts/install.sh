@@ -30,6 +30,7 @@ function linkconfig() {
 }
 
 link .bashrc
+link .bash_profile
 link .tmux.conf
 link .vimrc
 
@@ -70,6 +71,7 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
   cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 fi
 
+# NixOS madness
 nixos_config_file=/etc/nixos/configuration.nix
 
 if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then

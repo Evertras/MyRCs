@@ -71,6 +71,7 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
 fi
 
 nixos_config_file=/etc/nixos/configuration.nix
+nixos_flake_file=/etc/nixos/flake.nix
 
 if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
   read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r
@@ -87,5 +88,6 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
     sudo rm "${nixos_config_file}"
     sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
+    sudo ln -s $(pad)/nix/flake.nix "${nixos_flake_file}"
   fi
 fi

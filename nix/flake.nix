@@ -13,7 +13,7 @@
 
   outputs = { self, nixpkgs, ... }@inputs: {
     nixosConfigurations = {
-      "sandbox" = nixpkgs.lib.nixosSystem {
+      "nixbox" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
 
         modules = [

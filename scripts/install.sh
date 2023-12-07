@@ -99,6 +99,9 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
     sudo rm -f "${nixos_config_file}"
     sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
+
+    echo "Switching..."
+    sudo nixos-rebuild switch
   fi
 fi
 

@@ -1,3 +1,5 @@
+" NOTE: This file is deprecated due to using neovim, but is still around
+" just in case we need a raw vim setup...
 syntax enable
 
 set nocompatible
@@ -196,7 +198,7 @@ set tabstop=4
 set expandtab
 set mouse=
 " Makes the cursor start at the beginning of the line for tabs
-"set list listchars=tab:\ 
+"set list listchars=tab:\
 
 " Our shell scripts are bash scripts, trust us
 let g:is_bash = 1

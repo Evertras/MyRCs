@@ -34,7 +34,7 @@ link .bash_profile
 link .tmux.conf
 link .vimrc
 
-mkdir -p ~/.bashrc.d/themes
+mkdir -p ~/.bashrc.d/extras
 
 # Sample tmux config
 if ! [[ -f ~/.tmux.local.conf ]]; then
@@ -44,10 +44,10 @@ if ! [[ -f ~/.tmux.local.conf ]]; then
 #set -g default-shell /usr/local/bin/bash" > ~/.tmux.local.conf
 fi
 
-# Link all our themes
-for SRCFILE in ./.bashrc.d/themes/*; do
+# Link all our extra bashrc.d files
+for SRCFILE in ./.bashrc.d/extras/*; do
 	if [[ -f ${SRCFILE} ]]; then
-		THEME_FILE=.bashrc.d/themes/${SRCFILE##*/}
+		THEME_FILE=.bashrc.d/extras/${SRCFILE##*/}
 		link ${THEME_FILE}
 	fi
 done
@@ -124,11 +124,10 @@ if [ -z "${gpg_key}" ]; then
   gpg --armor --export "${gpg_key}"
 fi
 
-echo "Using GPG key ${gpg_key}"
-
 # Bootstrap standard .gitconfig
 if [ ! -f ~/.gitconfig ]; then
   echo "Creating basic ~/.gitconfig with GPG signing enabled"
+  echo "Using GPG key ${gpg_key}"
   echo "[user]
   email = bfullj@gmail.com
   name = Brandon Fulljames

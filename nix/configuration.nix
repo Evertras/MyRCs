@@ -96,8 +96,11 @@
 
   services.openssh = {
     enable = true;
-    settings.PasswordAuthentication = false;
-    settings.KbdInteractiveAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = false;
+      KbdInteractiveAuthentication = false;
+      X11Forwarding = true;
+    };
   };
 }
-

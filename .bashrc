@@ -114,7 +114,9 @@ everbash_set_bash_prompt() {
 	PS1="\[${COLOR_B_BG}${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\]\n$(everbash_success_symbol)\[${COLOR_RESET}\] "
 }
 
-if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
+if which starship &>/dev/null; then
+  eval "$(starship init bash)"
+elif [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
 	PS1="\[${COLOR_B_FG}\]\w \[${COLOR_B_FG}\]$\[${COLOR_RESET}\] "
 else
 	PROMPT_COMMAND=everbash_set_bash_prompt

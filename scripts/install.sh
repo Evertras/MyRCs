@@ -71,6 +71,12 @@ if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
   cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 fi
 
+# Bootstrap neovim with Packer
+if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
+  echo "Installing Packer for Neovim"
+  git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+fi
+
 # NixOS madness
 nixos_config_file=/etc/nixos/configuration.nix
 
@@ -80,8 +86,12 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
     sudo mkdir -p /etc/nixos/passwords/
-    read -s -p "Set evertras password: " password
-    echo ""
+    while [ "${password}" != "${password_confirm}" ] && [ -n "${password}" ]; do
+      read -s -p "Set evertras password: " password
+      echo ""
+      read -s -p "Confirm evertras password: " password_confirm
+      echo ""
+    done
     mkpasswd "${password}" | sudo tee /etc/nixos/passwords/evertras
     sudo chmod 0600 /etc/nixos/passwords/evertras
     echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
@@ -90,4 +100,34 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
     sudo rm -f "${nixos_config_file}"
     sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
   fi
+fi
+
+gnupg_agent_config_file=~/.gnupg/gpg-agent.conf
+
+if [ -f "${nixos_config_file}" ] && [ ! -f "${gnupg_agent_config_file}" ]; then
+  echo "Bootstrapping ~/.gnupg/gpg-agent.conf to make pinentry work with Nix"
+  echo 'pinentry-program /run/current-system/sw/bin/pinentry' > "${gnupg_agent_config_file}"
+fi
+
+# Create a GPG key if one doesn't already exist
+gpg_key=$(gpg --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
+
+if [ -z "${gpg_key}" ]; then
+  gpg2 --full-generate-key
+  gpg_key=$(gpg --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
+fi
+
+echo "Using GPG key ${gpg_key}"
+
+# Bootstrap standard .gitconfig
+if [ ! -f ~/.gitconfig ]; then
+  echo "Creating basic ~/.gitconfig with GPG signing enabled"
+  echo "[user]
+  email = bfullj@gmail.com
+  name = Brandon Fulljames
+  signingkey = ${gpg_key}
+[commit]
+  gpgsign = true
+[gpg]
+  program = gpg2" > ~/.gitconfig
 fi

@@ -92,4 +92,3 @@ if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
 else
 	PROMPT_COMMAND=everbash_set_bash_prompt
 fi
-i

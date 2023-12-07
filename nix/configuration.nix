@@ -1,4 +1,10 @@
 # Sample config that was usable in virtualbox, for reference
+#
+# Note that flakes were explored, but unifying the hardware-config.nix
+# with the flake lock is incredibly obnoxious.  I'd rather have a bit of
+# variability with latest packages getting updated and still get the benefits
+# of having everything in a config rather than deal with finicky flake
+# setups.  Revisit some day to see if there's a nicer way to do this.
 { config, pkgs, ... }:
 
 # Old way that I tried first, keeping for learning nix language

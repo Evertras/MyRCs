@@ -24,9 +24,11 @@
     pkgs.neovim
     pkgs.pinentry
     pkgs.tldr
+    pkgs.silver-searcher
     pkgs.starship
   ];
 
+  # Applies to root
   environment.variables = {
     EDITOR = "nvim";
   };

@@ -19,8 +19,11 @@
   ];
 
   environment.systemPackages = [
+    pkgs.gcc
     pkgs.git
+    pkgs.gnupg
     pkgs.neovim
+    pkgs.pinentry
     pkgs.tldr
     pkgs.starship
   ];

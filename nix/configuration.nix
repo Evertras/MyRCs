@@ -22,6 +22,7 @@
     pkgs.gcc
     pkgs.git
     pkgs.neovim
+    pkgs.pinentry
     pkgs.tldr
     pkgs.starship
   ];

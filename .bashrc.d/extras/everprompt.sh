@@ -38,39 +38,6 @@ everbash_prompt_colors() {
 	COLOR_GIT_BG_B="${12}"
 }
 
-# Forest theme
-everbash_prompt_colors \
-	0 0 0 \
-	100 200 120 \
-	0 0 0 \
-	220 130 90
-
-if [[ $EVERTRAS_SCREEN_MODE == dark ]]; then
-
-	everbash_prompt_colors \
-		0 0 0 \
-		0 150 220 \
-		0 0 0 \
-		250 120 20
-
-elif [[ $EVERTRAS_SCREEN_MODE == neutral ]]; then
-
-	everbash_prompt_colors \
-		20 0 0 \
-		100 200 200 \
-		20 20 20 \
-		150 150 200
-
-else
-
-	everbash_prompt_colors \
-		177 124 62 \
-		220 200 150 \
-		150 150 200 \
-		150 150 200
-
-fi
-
 parse_git_branch() {
 	git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/  \1 /'
 }
@@ -83,12 +50,15 @@ everbash_success_symbol() {
 	fi
 }
 
+# Apply Forest theme
+everbash_prompt_colors \
+	0 0 0 \
+	100 200 120 \
+	0 0 0 \
+	220 130 90
+
 everbash_set_bash_prompt() {
 	PS1="\[${COLOR_B_BG}${COLOR_A_FG}\] \w \[${COLOR_GIT_FG}${COLOR_GIT_BG}\]$(parse_git_branch)\[${COLOR_RESET}\]\n$(everbash_success_symbol)\[${COLOR_RESET}\] "
 }
 
-if [[ $EVERTRAS_PROMPT_MODE == simple ]]; then
-	PS1="\[${COLOR_B_FG}\]\w \[${COLOR_B_FG}\]$\[${COLOR_RESET}\] "
-else
-	PROMPT_COMMAND=everbash_set_bash_prompt
-fi
+PROMPT_COMMAND=everbash_set_bash_prompt

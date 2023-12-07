@@ -103,7 +103,7 @@
     enable = true;
     settings = {
       PasswordAuthentication = false;
-      PermitRootLogin = false;
+      PermitRootLogin = "no";
       KbdInteractiveAuthentication = false;
       X11Forwarding = true;
     };

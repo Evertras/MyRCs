@@ -88,6 +88,6 @@ if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
     sudo rm "${nixos_config_file}"
     sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
-    sudo ln -s $(pad)/nix/flake.nix "${nixos_flake_file}"
+    sudo ln -s $(pwd)/nix/flake.nix "${nixos_flake_file}"
   fi
 fi

@@ -11,7 +11,7 @@ xrandr \
   --output DP-4 --auto \
   --output HDMI-0 --right-of DP-4 --auto --rotate left \
   --output DP-1-3 --left-of DP-4 --auto
-xset s 36000
+xset s 3600
 xset dpms 0 0 36000
 
 # Set our background

@@ -88,7 +88,10 @@ return require('packer').startup(function(use)
   -- Copilot (personal)
   use 'github/copilot.vim'
 
+  -- Debugger
+  -- https://github.com/mfussenegger/nvim-dap
   use 'mfussenegger/nvim-dap'
+  -- https://github.com/leoluz/nvim-dap-go
   use 'leoluz/nvim-dap-go'
 
   -- Automatically set up configuration after cloning packer.nvim

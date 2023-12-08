@@ -9,7 +9,7 @@ local function custom_attach(bufnr)
   api.config.mappings.default_on_attach(bufnr)
 
   -- custom mappings
-  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Up'))
+  vim.keymap.set('n', '<C-t>', api.tree.change_root_to_parent, opts('Open parent directory'))
   vim.keymap.set('n', '?', api.tree.toggle_help, opts('Help'))
   vim.keymap.set('n', 's', api.node.open.vertical, opts('Open: Vertical split'))
   vim.keymap.set('n', 'i', api.node.open.horizontal, opts('Open: Horizontal split'))

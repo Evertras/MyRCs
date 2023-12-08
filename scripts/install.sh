@@ -87,20 +87,24 @@ fi
 # NixOS madness
 nixos_config_file=/etc/nixos/configuration.nix
 
-if [ -f "${nixos_config_file}" ] && [ ! -L "${nixos_config_file}" ]; then
+if [ -f "${nixos_config_file}" ]; then
   read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r
   echo ""
 
   if [[ ! REPLY =~ ^[Yy]$ ]]; then
-    sudo mkdir -p /etc/nixos/passwords/
-    while [ "${password}" != "${password_confirm}" ] && [ -n "${password}" ]; do
-      read -s -p "Set evertras password: " password
-      echo ""
-      read -s -p "Confirm evertras password: " password_confirm
-      echo ""
-    done
-    mkpasswd "${password}" | sudo tee /etc/nixos/passwords/evertras
-    sudo chmod 0600 /etc/nixos/passwords/evertras
+
+    if [ ! -f "/etc/nixos/passwords/evertras" ]; then
+      sudo mkdir -p /etc/nixos/passwords/
+      while [ "${password}" != "${password_confirm}" ] && [ -n "${password}" ]; do
+        read -s -p "Set evertras password: " password
+        echo ""
+        read -s -p "Confirm evertras password: " password_confirm
+        echo ""
+      done
+      mkpasswd "${password}" | sudo tee /etc/nixos/passwords/evertras
+      sudo chmod 0600 /etc/nixos/passwords/evertras
+    fi
+
     echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
     sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
     echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"

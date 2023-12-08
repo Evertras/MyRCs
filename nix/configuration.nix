@@ -27,6 +27,7 @@
   environment.systemPackages = [
     pkgs.gcc
     pkgs.git
+    pkgs.go
     pkgs.neovim
     pkgs.pinentry
     pkgs.tldr

@@ -29,6 +29,15 @@ function linkconfig() {
 	ln -s ${src} ${linkfile}
 }
 
+function cp-if-not-exists() {
+  from="${1}"
+  to="${2}"
+  if [ ! -f "${to}" ]; then
+    echo "Copying ${from} to ${to}"
+    cp "${from}" "${to}"
+  fi
+}
+
 link .bashrc
 link .bash_profile
 link .tmux.conf
@@ -62,11 +71,12 @@ linkconfig alacritty/base.yml
 linkconfig alacritty/mode-demo.base.yml
 touch ~/.config/alacritty/override.yml
 linkconfig alacritty/alacritty.yml
+cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
 
-if [ ! -f ~/.config/alacritty/mode-demo.yml ]; then
-  echo "Copying Alacritty mode-demo.base.yml into mode-demo.yml"
-  cp etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
-fi
+# i3 for Linux machines
+linkconfig i3/config
+cp-if-not-exists etc/i3/machine-specific ~/.config/i3/machine-specific
+
 
 # Bootstrap neovim with Packer
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then

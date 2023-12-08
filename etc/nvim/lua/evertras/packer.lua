@@ -98,6 +98,9 @@ return require('packer').startup(function(use)
   -- https://github.com/SmiteshP/nvim-navic
   use 'SmiteshP/nvim-navic'
 
+  -- Rainbow delimiters to more easily see matching brackets
+  use 'HiPhish/rainbow-delimiters.nvim'
+
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

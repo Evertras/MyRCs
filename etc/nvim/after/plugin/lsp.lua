@@ -87,3 +87,14 @@ vim.keymap.set('n', '<leader>f', quickfix)
 
 -- Autoformat on save
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+
+-- Add navic
+-- https://github.com/SmiteshP/nvim-navic#%EF%B8%8F-setup
+
+local navic = require('nvim-navic')
+
+navic.setup({
+  lsp = {
+    auto_attach = true,
+  },
+})

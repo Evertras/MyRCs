@@ -94,6 +94,10 @@ return require('packer').startup(function(use)
   -- https://github.com/leoluz/nvim-dap-go
   use 'leoluz/nvim-dap-go'
 
+  -- See where we are in code contexts
+  -- https://github.com/SmiteshP/nvim-navic
+  use 'SmiteshP/nvim-navic'
+
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

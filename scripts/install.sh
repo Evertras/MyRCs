@@ -75,7 +75,7 @@ cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.
 
 # i3 for Linux machines
 linkconfig i3/config
-cp-if-not-exists etc/i3/machine-specific ~/.config/i3/machine-specific
+cp-if-not-exists etc/i3/machine-specific.conf ~/.config/i3/machine-specific.conf
 cp-if-not-exists etc/i3/startup.sh ~/.config/i3/startup.sh
 
 # Bootstrap neovim with Packer

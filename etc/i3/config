@@ -10,7 +10,7 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 # Include machine-specific things that are outside version control
-include ~/.config/i3/machine-specific
+#include ~/.config/i3/machine-specific.conf
 
 # Run any startup things we want, like setting up displays / compositor
 exec --no-startup-id ~/.config/i3/startup.sh

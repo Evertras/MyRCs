@@ -12,6 +12,7 @@
 # Include machine-specific things that are outside version control
 include ~/.config/i3/machine-specific
 
+# The mod key to use for i3 things
 set $mod Mod4
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so

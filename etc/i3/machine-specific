@@ -13,6 +13,3 @@ font pango:DejaVu Sans Mono 12
 
 # Fix display and use both monitors
 exec --no-startup-id ~/.config/i3/startup.sh
-
-# The mod key to use for i3 things
-set $mod Mod4

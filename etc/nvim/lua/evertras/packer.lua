@@ -101,6 +101,9 @@ return require('packer').startup(function(use)
   -- Rainbow delimiters to more easily see matching brackets
   use 'HiPhish/rainbow-delimiters.nvim'
 
+  -- See code symbols as a tree for easier navigation in larger files
+  use 'simrat39/symbols-outline.nvim'
+
   -- Automatically set up configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

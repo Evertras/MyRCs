@@ -52,9 +52,6 @@ for SRCFILE in ./.bashrc.d/extras/*; do
 	fi
 done
 
-# Helix .config
-linkconfig helix/config.toml
-
 # Nvim .config
 linkconfig nvim/init.lua
 linkconfig nvim/lua/evertras

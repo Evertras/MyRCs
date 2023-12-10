@@ -19,6 +19,7 @@ pkgs.mkShell {
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
+  # Not technically 'pure' but I really like my bashrc
   shellHook = ''
     source ~/.bashrc
   '';

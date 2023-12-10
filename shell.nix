@@ -8,13 +8,13 @@ in
 pkgs.mkShell {
   packages = with pkgs; [
     # Core important things for --pure
-    busybox
     git
     gnupg
     openssh
     which
+    wget
 
-    # dev stuff
+    # Terminal stuff
     neovim
     silver-searcher
     starship
@@ -23,6 +23,10 @@ pkgs.mkShell {
 
     # Need this globally for Copilot
     nodejs_21
+
+    # Dev stuff
+    go
+    rustc
   ];
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";

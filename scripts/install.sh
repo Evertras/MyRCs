@@ -34,6 +34,7 @@ function cp-if-not-exists() {
   to="${2}"
   if [ ! -f "${to}" ]; then
     echo "Copying ${from} to ${to}"
+    mkdir -p "${to%/*}"
     cp "${from}" "${to}"
   fi
 }
@@ -81,6 +82,9 @@ cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.
 linkconfig i3/config
 cp-if-not-exists etc/i3/machine-specific.conf ~/.config/i3/machine-specific.conf
 cp-if-not-exists etc/i3/startup.sh ~/.config/i3/startup.sh
+
+# Template for tmuxinator
+cp-if-not-exists etc/tmuxinator/copyme.yml ~/.config/tmuxinator/copyme.yml
 
 # Bootstrap neovim with Packer
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then

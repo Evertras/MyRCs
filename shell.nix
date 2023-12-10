@@ -9,12 +9,16 @@ pkgs.mkShell {
   packages = with pkgs; [
     # Core important things for --pure
     git
+    gnupg
     openssh
     which
 
     # General stuff
     neovim
+    silver-searcher
     starship
+    tmux
+    tmuxinator
   ];
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";

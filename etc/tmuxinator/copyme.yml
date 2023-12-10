@@ -1,0 +1,9 @@
+name: CHANGEME
+root: ~/dev/github/evertras
+
+windows:
+  - main:
+      layout: main-horizontal
+      panes:
+        - vim .
+        - clear

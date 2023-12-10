@@ -89,6 +89,9 @@ shopt -s checkwinsize
 # Append to history per-command rather than waiting for shell to exit
 shopt -s histappend
 
+# Don't ding on autocomplete
+bind 'set bell-style none'
+
 # Don't show control characters (for interactive shells only)
 [[ $- == *i* ]] && stty -echoctl
 

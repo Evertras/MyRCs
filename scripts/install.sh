@@ -125,11 +125,12 @@ fi
 
 # Create a GPG key if one doesn't already exist
 gpg_key=$(gpg --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
+gpg_bin=$(which gpg2 || which gpg)
 
 if [ -z "${gpg_key}" ]; then
   echo "No existing GPG key found, generating..."
-  gpg2 --full-generate-key
-  gpg_key=$(gpg --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
+  ${gpg_bin} --full-generate-key
+  gpg_key=$(${gpg_bin} --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
 
   echo "Printing public GPG key, paste this into Github!"
   gpg --armor --export "${gpg_key}"
@@ -146,5 +147,5 @@ if [ ! -f ~/.gitconfig ]; then
 [commit]
   gpgsign = true
 [gpg]
-  program = gpg2" > ~/.gitconfig
+  program = ${gpg_bin}" > ~/.gitconfig
 fi

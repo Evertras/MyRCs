@@ -42,6 +42,7 @@ link .bashrc
 link .bash_profile
 link .tmux.conf
 link .vimrc
+link shell.nix
 
 mkdir -p ~/.bashrc.d/extras
 
@@ -65,6 +66,9 @@ done
 linkconfig nvim/init.lua
 linkconfig nvim/lua/evertras
 linkconfig nvim/after/plugin
+
+# Starship config
+linkconfig starship.toml
 
 # Alacritty .config
 linkconfig alacritty/base.yml
@@ -136,7 +140,7 @@ if [ -z "${gpg_key}" ]; then
   gpg --armor --export "${gpg_key}"
 fi
 
-# Bootstrap standard .gitconfig
+# Bootstrap standard .gitconfig to use our GPG key
 if [ ! -f ~/.gitconfig ]; then
   echo "Creating basic ~/.gitconfig with GPG signing enabled"
   echo "Using GPG key ${gpg_key}"

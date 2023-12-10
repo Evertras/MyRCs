@@ -19,10 +19,9 @@ else
 	alias ls='ls --color'
 fi
 
+# Enable starship as our bash prompt if it's installed
 if which starship &>/dev/null; then
   eval "$(starship init bash)"
-else
-  source ~/.bashrc.d/extras/everprompt.sh
 fi
 
 ################################################################################

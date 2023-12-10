@@ -13,7 +13,7 @@ pkgs.mkShell {
     openssh
     which
 
-    # General stuff
+    # dev stuff
     neovim
     silver-searcher
     starship

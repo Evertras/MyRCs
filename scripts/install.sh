@@ -149,3 +149,9 @@ if [ ! -f ~/.gitconfig ]; then
 [gpg]
   program = ${gpg_bin}" > ~/.gitconfig
 fi
+
+# Make sure en_US is actually installed (need this for WSL, etc)
+if ! locale -a 2>/dev/null | grep en_US &>/dev/null; then
+  echo "en_US locale not installed, generating..."
+  sudo locale-gen en_US.UTF-8
+fi

@@ -8,6 +8,7 @@ in
 pkgs.mkShell {
   packages = with pkgs; [
     # Core important things for --pure
+    busybox
     git
     gnupg
     openssh

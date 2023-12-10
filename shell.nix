@@ -20,6 +20,9 @@ pkgs.mkShell {
     starship
     tmux
     tmuxinator
+
+    # Need this globally for Copilot
+    nodejs_21
   ];
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";

@@ -41,6 +41,7 @@ function cp-if-not-exists() {
 
 link .bashrc
 link .bash_profile
+link .editorconfig
 link .tmux.conf
 link .vimrc
 link shell.nix

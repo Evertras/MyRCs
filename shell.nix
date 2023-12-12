@@ -14,6 +14,7 @@ pkgs.mkShell {
     gnupg
     openssh
     ps
+    unixtools.column
     unzip
     which
     wget
@@ -23,10 +24,14 @@ pkgs.mkShell {
     fx
     jq
     neovim
+    ripgrep
     silver-searcher
     starship
     tmux
     tmuxinator
+
+    # Networking stuff
+    sipcalc
 
     # Need this globally for Copilot
     nodejs_21
@@ -35,8 +40,13 @@ pkgs.mkShell {
     cargo
     direnv
     go
+    python39
     rustc
     vagrant
+
+    # AWS stuff
+    awscli2
+    ssm-session-manager-plugin
   ];
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";

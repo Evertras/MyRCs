@@ -8,13 +8,20 @@ in
 pkgs.mkShell {
   packages = with pkgs; [
     # Core important things for --pure
+    cacert
+    curl
     git
     gnupg
     openssh
+    ps
+    unzip
     which
     wget
+    zip
 
     # Terminal stuff
+    fx
+    jq
     neovim
     silver-searcher
     starship
@@ -25,8 +32,11 @@ pkgs.mkShell {
     nodejs_21
 
     # Dev stuff
+    cargo
+    direnv
     go
     rustc
+    vagrant
   ];
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";

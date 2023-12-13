@@ -12,7 +12,26 @@ sudo apt update
 # Common things
 mkdir -p ~/bin
 
-# Terminal things
+if ! type nvim; then
+  # The apt package is very old, we want latest so we build from source
+  # https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
+  sudo apt install -y ninja-build gettext cmake unzip curl
+  rm -rf ~/.build-nvim
+  mkdir -p ~/.build-nvim
+  pushd ~/.build-nvim
+    git clone https://github.com/neovim/neovim
+    cd neovim
+    make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.build-nvim"
+    make install
+    mv ~/.build-nvim/bin/nvim ~/bin/nvim
+  popd
+fi
+
+# Tmux + tmuxinator
+if ! type tmux; then
+  sudo apt install -y tmux
+fi
+
 if ! type tmuxinator; then
   sudo apt install -y tmuxinator
 fi
@@ -24,9 +43,9 @@ fi
 
 if ! type picom; then
   sudo apt install -y libconfig-dev libdbus-1-dev libegl-dev libev-dev libgl-dev libpcre2-dev libpixman-1-dev libx11-xcb-dev libxcb1-dev libxcb-composite0-dev libxcb-damage0-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-image0-dev libxcb-present-dev libxcb-randr0-dev libxcb-render0-dev libxcb-render-util0-dev libxcb-shape0-dev libxcb-util-dev libxcb-xfixes0-dev libxext-dev meson ninja-build uthash-dev
-  rm -rf ~/.picom-build
-  mkdir -p ~/.picom-build
-  pushd ~/.picom-build
+  rm -rf ~/.build-picom
+  mkdir -p ~/.build-picom
+  pushd ~/.build-picom
     git clone https://github.com/yshui/picom
     cd picom
 
@@ -37,7 +56,7 @@ if ! type picom; then
     echo "Installing picom to ~/bin/picom"
     mv build/src/picom ~/bin/picom
   popd
-  rm -rf ~/.picom-build
+  rm -rf ~/.build-picom
 fi
 
 # Rust (mostly for Alacritty)

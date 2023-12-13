@@ -46,8 +46,6 @@ link .tmux.conf
 link .vimrc
 link shell.nix
 
-mkdir -p ~/.bashrc.d/extras
-
 # Sample tmux config
 if ! [[ -f ~/.tmux.local.conf ]]; then
   echo "# Custom tmux settings for this machine.  Example:
@@ -55,14 +53,6 @@ if ! [[ -f ~/.tmux.local.conf ]]; then
 # Use homebrew's bash
 #set -g default-shell /usr/local/bin/bash" > ~/.tmux.local.conf
 fi
-
-# Link all our extra bashrc.d files
-for SRCFILE in ./.bashrc.d/extras/*; do
-	if [[ -f ${SRCFILE} ]]; then
-		THEME_FILE=.bashrc.d/extras/${SRCFILE##*/}
-		link ${THEME_FILE}
-	fi
-done
 
 # Nvim .config
 linkconfig nvim/init.lua

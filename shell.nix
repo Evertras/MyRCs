@@ -13,6 +13,7 @@ pkgs.mkShell {
     git
     gnupg
     openssh
+    openssl
     ps
     unixtools.column
     unzip

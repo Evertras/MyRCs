@@ -56,7 +56,7 @@ if type asdf &>/dev/null; then
 
   if [[ "$(asdf list nodejs 2>&1)" =~ "No versions installed" ]]; then
     echo "Installing NodeJS globally via asdf..."
-    version=$(asdf latest)
+    version=$(asdf latest nodejs)
     asdf install nodejs "${version}"
     asdf global nodejs "${version}"
   fi

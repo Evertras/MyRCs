@@ -6,14 +6,30 @@ let
 in
 
 pkgs.mkShell {
+  # Things used at runtime
+  buildInputs = with pkgs; [
+    stdenv.cc.cc.lib
+    gcc
+    glibc
+    libffi
+    libstdcxx5
+    openssl
+    zlib
+  ];
+
   packages = with pkgs; [
+    # Helpful for debugging
+    # Usage example:
+    #  nix-index
+    #  nix-locate sys_errlist.h
+    nix-index
+
     # Core important things for --pure
     cacert
     curl
     git
     gnupg
     openssh
-    openssl
     ps
     unixtools.column
     unzip
@@ -34,14 +50,11 @@ pkgs.mkShell {
     # Networking stuff
     sipcalc
 
-    # Need this globally for Copilot
-    nodejs_21
-
     # Dev stuff
+    asdf-vm
     cargo
     direnv
     go
-    pyenv
     rustc
     vagrant
 
@@ -52,8 +65,9 @@ pkgs.mkShell {
 
   LOCALE_ARCHIVE = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
-  # Not technically 'pure' but I really like my bashrc
   shellHook = ''
+    source ${pkgs.asdf-vm}/etc/profile.d/asdf-prepare.sh
+    # Not technically 'pure' but I really like my bashrc
     source ~/.bashrc
   '';
 }

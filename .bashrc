@@ -25,18 +25,22 @@ fi
 
 # Enable various commonly used tools if they're installed, skip otherwise
 
-if which starship &>/dev/null; then
+if type starship &>/dev/null; then
   eval "$(starship init bash)"
 fi
 
-if which direnv &>/dev/null; then
+if type direnv &>/dev/null; then
   eval "$(direnv hook bash)"
 fi
 
-if which pyenv &>/dev/null; then
+if type pyenv &>/dev/null; then
   export PYENV_ROOT="${HOME}/.pyenv"
   command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin/:$PATH"
   eval "$(pyenv init -)"
+fi
+
+if [[ -f "~/.cargo/env" ]]; then
+  . "~/.cargo/env"
 fi
 
 ################################################################################
@@ -218,6 +222,9 @@ function aws-ec2-list() {
 function aws-connect() {
   aws ssm start-session --target "${1}"
 }
+
+# A place for locally built tools to avoid global installs
+export PATH="~/bin:${PATH}"
 
 ################################################################################
 ############################ END ###############################################

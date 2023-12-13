@@ -8,13 +8,14 @@ in
 pkgs.mkShell {
   # Things used at runtime
   buildInputs = with pkgs; [
-    stdenv.cc.cc.lib
     gcc
     glibc
     libffi
     libstdcxx5
-    openssl
-    zlib
+    openssl.dev
+    pkg-config
+    readline
+    zlib.dev
   ];
 
   packages = with pkgs; [

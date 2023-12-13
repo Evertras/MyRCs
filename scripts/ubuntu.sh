@@ -36,6 +36,19 @@ if ! type tmuxinator; then
   sudo apt install -y tmuxinator
 fi
 
+# asdf
+if ! type asdf; then
+  # https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+fi
+
+# Rust (mostly for Alacritty)
+if ! type cargo; then
+  echo "DO NOT MODIFY BASHRC/PROFILE (or fix them later if you did)"
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  reloadbash
+fi
+
 # Desktop environment with i3
 if ! type i3; then
   sudo apt install -y i3 dmenu
@@ -58,13 +71,6 @@ if ! type picom; then
     mv build/src/picom ~/bin/picom
   popd
   rm -rf ~/.build-picom
-fi
-
-# Rust (mostly for Alacritty)
-if ! type cargo; then
-  echo "DO NOT MODIFY BASHRC/PROFILE (or fix them later if you did)"
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  reloadbash
 fi
 
 if ! type alacritty; then

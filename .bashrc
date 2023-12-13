@@ -39,8 +39,12 @@ if type pyenv &>/dev/null; then
   eval "$(pyenv init -)"
 fi
 
-if [[ -f "~/.cargo/env" ]]; then
-  . "~/.cargo/env"
+if [[ -f ~/.cargo/env ]]; then
+  . ~/.cargo/env
+fi
+
+if [[ -f ~/.asdf/asdf.sh ]]; then
+  . ~/.asdf/asdf.sh
 fi
 
 ################################################################################

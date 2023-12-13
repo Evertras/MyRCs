@@ -40,7 +40,7 @@ pkgs.mkShell {
     cargo
     direnv
     go
-    python39
+    pyenv
     rustc
     vagrant
 

@@ -19,13 +19,22 @@ else
 	alias ls='ls --color'
 fi
 
-# Enable starship as our bash prompt if it's installed
+################################################################################
+######################### COMMON EVALS #########################################
+################################################################################
+
+# Enable various commonly used tools if they're installed, skip otherwise
+
 if which starship &>/dev/null; then
   eval "$(starship init bash)"
 fi
 
 if which direnv &>/dev/null; then
   eval "$(direnv hook bash)"
+fi
+
+if which pyenv &>/dev/null; then
+  eval "$(pyenv init -)"
 fi
 
 ################################################################################

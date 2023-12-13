@@ -94,7 +94,8 @@ shopt -s checkwinsize
 shopt -s histappend
 
 # Don't ding on autocomplete
-bind 'set bell-style none'
+# TODO: Fix this to be more conditional, it breaks i3...?
+#bind 'set bell-style none'
 
 # Don't show control characters (for interactive shells only)
 [[ $- == *i* ]] && stty -echoctl
@@ -110,9 +111,9 @@ export LC_ALL=en_US.UTF-8
 export GPG_TTY="$(tty)"
 
 # Machine-specific bash stuff should go in this directory
-for SRCFILE in ~/.bashrc.d/*; do
-	if [[ -f ${SRCFILE} ]]; then
-		source ${SRCFILE}
+for src in ~/.bashrc.d/*; do
+	if [[ -f ${src} ]]; then
+		source ${src}
 	fi
 done
 
@@ -194,6 +195,17 @@ function git-merged() {
   git checkout main
   git pull
   git branch -d "${branch}"
+}
+
+function aws-ec2-list() {
+  aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" |
+    jq -r '.Reservations | .[] | .Instances | .[] | { Id: .InstanceId, Name: (.Tags[] | select(.Key == "Name") | .Value) } | [.Name, .Id] | @tsv' |
+    sort |
+    column -t
+}
+
+function aws-connect() {
+  aws ssm start-session --target "${1}"
 }
 
 ################################################################################

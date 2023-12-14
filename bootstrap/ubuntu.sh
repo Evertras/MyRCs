@@ -98,6 +98,11 @@ if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
     popd
   fi
 
+  # Direnv
+  if ! type direnv; then
+    sudo apt install -y direnv
+  fi
+
   # Used to using ag for searching
   if ! type ag; then
     sudo apt install -y silversearcher-ag

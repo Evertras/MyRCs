@@ -91,6 +91,8 @@ if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
     pushd ~/.everbuild-nvim
       git clone https://github.com/neovim/neovim
       cd neovim
+      # Latest has had some strange behavior in the past, so pin here
+      git checkout v0.9.4
       make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.everbuild-nvim"
       make install
       mv ~/.everbuild-nvim/bin/nvim ~/bin/nvim

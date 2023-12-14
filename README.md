@@ -4,13 +4,22 @@ My RCs and stuff.
 
 ## Useful links
 
-Unicode font for fanciness here: https://github.com/ryanoasis/powerline-extra-symbols
+[Nerdfonts](https://www.nerdfonts.com/)
 
-## Install nix
+## Install nix (optional)
 
 [Docs](https://nixos.org/download.html)
 
-## Install everything
+Installation of the nix config is taken care of in the config installation step.
+
+## Bootstrap the machine (optional)
+
+Check [./bootstrap](./bootstrap/) for bootstrapping a machine with things like
+i3, asdf, picom, etc.
+
+## Install configs
+
+Installs configs by linking them to this repository.
 
 ```bash
 ./scripts/install.sh

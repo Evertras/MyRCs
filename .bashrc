@@ -47,6 +47,7 @@ if [[ -f ~/.asdf/asdf.sh ]]; then
   . ~/.asdf/asdf.sh
 fi
 
+# May not be in .asdf/asdf.sh if running in nix, for example, so separate check
 if type asdf &>/dev/null; then
   # Want to make sure there's some version of NodeJS for some neovim things
   if ! asdf list nodejs &>/dev/null; then

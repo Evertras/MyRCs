@@ -60,6 +60,8 @@ if type asdf &>/dev/null; then
     asdf install nodejs "${version}"
     asdf global nodejs "${version}"
   fi
+
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 fi
 
 ################################################################################

@@ -103,8 +103,19 @@ if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
     sudo apt install -y silversearcher-ag
   fi
 
+  # jq/fx for json
+  if ! type jq; then
+    sudo apt install -y jq
+  fi
+
+  if ! type fx; then
+    fx_version=31.0.0
+    curl -Lo ~/bin/fx "https://github.com/antonmedv/fx/releases/download/${fx_vesion}/fx_linux_amd64"
+    chmod +x ~/bin/fx
+  fi
+
   # Ripgrep is used by a Neovim plugin
-  if ! type ripgrep; then
+  if ! type rg; then
     sudo apt install -y ripgrep
   fi
 

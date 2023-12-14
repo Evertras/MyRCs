@@ -94,9 +94,11 @@ if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
       make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.everbuild-nvim"
       make install
       mv ~/.everbuild-nvim/bin/nvim ~/bin/nvim
+      # Need to keep .everbuild-nvim around for dependencies
     popd
   fi
 
+  # Used to using ag for searching
   if ! type ag; then
     sudo apt install -y silversearcher-ag
   fi

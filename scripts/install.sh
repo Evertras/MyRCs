@@ -44,7 +44,6 @@ link .bashrc
 link .bash_profile
 link .editorconfig
 link .tmux.conf
-link .tool-versions
 link .vimrc
 link shell.nix
 

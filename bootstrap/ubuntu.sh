@@ -72,12 +72,14 @@ if ! type alacritty; then
 fi
 
 ################################################################################
-# The following can be skipped if we're using nix, but included here for
-# completeness in case nix makes me want to throw it out a window some day
+# The following can be skipped if we're using nix, but included here because
+# using nix-shell on ubuntu as a dev environment creates build dependency hell
 
-read -p "Install things outside of nix? (y/n): " nonnix
+#read -p "Install things outside of nix? (y/n): " nonnix
+nonnix=y
 
-if [[ $nonnix =~ ^[Yy]$ ]]; then
+# TODO: Add an uninstall for each of these so we can revert
+if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
 
   # Neovim
   if ! type nvim; then
@@ -93,7 +95,15 @@ if [[ $nonnix =~ ^[Yy]$ ]]; then
       make install
       mv ~/.everbuild-nvim/bin/nvim ~/bin/nvim
     popd
-    rm -rf ~/.everbuild-nvim
+  fi
+
+  if ! type ag; then
+    sudo apt install -y silversearcher-ag
+  fi
+
+  # Ripgrep is used by a Neovim plugin
+  if ! type ripgrep; then
+    sudo apt install -y ripgrep
   fi
 
   # Tmux + tmuxinator
@@ -109,6 +119,11 @@ if [[ $nonnix =~ ^[Yy]$ ]]; then
   if ! type asdf; then
     # https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
     git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+  fi
+
+  # Starship
+  if ! type starship; then
+    curl -sS https://starship.rs/install.sh | sh
   fi
 
 fi

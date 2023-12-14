@@ -183,6 +183,7 @@ default_floating_border pixel 1
 # finds out, if available)
 bar {
   status_command i3status
+  separator_symbol " | "
   colors {
     separator #666666
     background #000000

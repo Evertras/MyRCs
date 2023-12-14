@@ -72,6 +72,7 @@ cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.
 
 # i3 for Linux machines
 linkconfig i3/config
+linkconfig i3status/config
 cp-if-not-exists etc/i3/machine-specific.conf ~/.config/i3/machine-specific.conf
 cp-if-not-exists etc/i3/startup.sh ~/.config/i3/startup.sh
 

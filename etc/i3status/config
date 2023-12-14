@@ -1,0 +1,33 @@
+general {
+  output_format = "i3bar"
+  colors = true
+  interval = 5
+}
+
+order += "load"
+order += "memory"
+order += "ethernet eno1"
+order += "tztime local"
+order += "tztime UTC"
+
+ethernet eno1 {
+  format_up = "%ip"
+  format_down = "NETWORK DOWN"
+}
+
+tztime local {
+  format = "%Y-%m-%d %H:%M:%S %Z"
+}
+
+tztime UTC {
+  format = "%m-%d %H:%M:%S UTC"
+  timezone = "UTC"
+}
+
+load {
+  format = "%5min %15min"
+}
+
+memory {
+  format = "Mem: %percentage_used used (%free free)"
+}

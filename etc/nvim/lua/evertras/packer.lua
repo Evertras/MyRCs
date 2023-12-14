@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
   -- For more color repo options:
   -- https://github.com/topics/neovim-colorscheme
   use { "catppuccin/nvim", as = "catppuccin" }
-  use "folke/tokyonight.nvim"
 
   -- For syntax highlighting
   -- https://github.com/nvim-treesitter/nvim-treesitter
@@ -36,9 +35,6 @@ return require('packer').startup(function(use)
     end,
   }
   use 'nvim-treesitter/playground'
-
-  -- https://github.com/mbbill/undotree
-  use 'mbbill/undotree'
 
   -- https://github.com/VonHeikemen/lsp-zero.nvim
   use {

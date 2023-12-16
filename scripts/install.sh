@@ -79,6 +79,9 @@ cp-if-not-exists etc/i3/startup.sh ~/.config/i3/startup.sh
 # Template for tmuxinator
 cp-if-not-exists etc/tmuxinator/copyme.yml ~/.config/tmuxinator/copyme.yml
 
+# Non-NixOS config
+linkconfig nix/nix.conf
+
 # Bootstrap neovim with Packer
 if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
   echo "Installing Packer for Neovim"

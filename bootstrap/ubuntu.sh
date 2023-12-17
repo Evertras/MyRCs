@@ -12,9 +12,6 @@ sudo apt update
 # Common place to run custom-built things from to avoid more global installs
 mkdir -p ~/bin
 
-################################################################################
-# The following should be installed regardless of using nix or not
-
 # Installs the myriad of dependencies required to build Python,
 # so that we can install it with asdf or pyenv
 sudo apt install -y --no-upgrade build-essential libncursesw5-dev libreadline-gplv2-dev libssl-dev libgdbm-dev libc6-dev libsqlite3-dev libbz2-dev libffi-dev
@@ -75,82 +72,70 @@ if [[ "${desktop}" =~ ^[Yy]$ ]]; then
   fi
 fi
 
-################################################################################
-# The following can be skipped if we're using nix, but included here because
-# using nix-shell on ubuntu as a dev environment creates build dependency hell
+# Neovim
+if ! type nvim; then
+  echo "Installing Neovim from source"
+  # The apt package is very old, we want latest so we build from source
+  # https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
+  sudo apt install -y ninja-build gettext cmake unzip curl
+  rm -rf ~/.evertras/store/nvim
+  mkdir -p ~/.evertras/store/nvim
+  pushd ~/.evertras/store/nvim
+    git clone https://github.com/neovim/neovim
+    cd neovim
+    # Latest has had some strange behavior in the past, so pin here
+    git checkout v0.9.4
+    make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.evertras/store/nvim"
+    make install
+    # Need to keep .evertras/store/nvim around for dependencies, so just link to make that explicit
+    ln -s ~/.evertras/store/nvim/bin/nvim ~/bin/nvim
+  popd
+fi
 
-#read -p "Install things outside of nix? (y/n): " nonnix
-nonnix=y
+# Direnv
+if ! type direnv; then
+  sudo apt install -y direnv
+fi
 
-# TODO: Add an uninstall for each of these so we can revert
-if [[ "${nonnix}" =~ ^[Yy]$ ]]; then
+# Used to using ag for searching
+if ! type ag; then
+  sudo apt install -y silversearcher-ag
+fi
 
-  # Neovim
-  if ! type nvim; then
-    echo "Installing Neovim from source"
-    # The apt package is very old, we want latest so we build from source
-    # https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
-    sudo apt install -y ninja-build gettext cmake unzip curl
-    rm -rf ~/.evertras/store/nvim
-    mkdir -p ~/.evertras/store/nvim
-    pushd ~/.evertras/store/nvim
-      git clone https://github.com/neovim/neovim
-      cd neovim
-      # Latest has had some strange behavior in the past, so pin here
-      git checkout v0.9.4
-      make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.evertras/store/nvim"
-      make install
-      # Need to keep .evertras/store/nvim around for dependencies, so just link to make that explicit
-      ln -s ~/.evertras/store/nvim/bin/nvim ~/bin/nvim
-    popd
-  fi
+# jq/fx for json
+if ! type jq; then
+  sudo apt install -y jq
+fi
 
-  # Direnv
-  if ! type direnv; then
-    sudo apt install -y direnv
-  fi
+if ! type fx; then
+  fx_version=31.0.0
+  curl -Lo ~/bin/fx "https://github.com/antonmedv/fx/releases/download/${fx_vesion}/fx_linux_amd64"
+  chmod +x ~/bin/fx
+fi
 
-  # Used to using ag for searching
-  if ! type ag; then
-    sudo apt install -y silversearcher-ag
-  fi
+# Ripgrep is used by a Neovim plugin
+if ! type rg; then
+  sudo apt install -y ripgrep
+fi
 
-  # jq/fx for json
-  if ! type jq; then
-    sudo apt install -y jq
-  fi
+# Tmux + tmuxinator
+if ! type tmux; then
+  sudo apt install -y tmux
+fi
 
-  if ! type fx; then
-    fx_version=31.0.0
-    curl -Lo ~/bin/fx "https://github.com/antonmedv/fx/releases/download/${fx_vesion}/fx_linux_amd64"
-    chmod +x ~/bin/fx
-  fi
+if ! type tmuxinator; then
+  sudo apt install -y tmuxinator
+fi
 
-  # Ripgrep is used by a Neovim plugin
-  if ! type rg; then
-    sudo apt install -y ripgrep
-  fi
+# asdf
+if ! type asdf; then
+  # https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
+  git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
+fi
 
-  # Tmux + tmuxinator
-  if ! type tmux; then
-    sudo apt install -y tmux
-  fi
-
-  if ! type tmuxinator; then
-    sudo apt install -y tmuxinator
-  fi
-
-  # asdf
-  if ! type asdf; then
-    # https://asdf-vm.com/guide/getting-started.html#_2-download-asdf
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.13.1
-  fi
-
-  # Starship
-  if ! type starship; then
-    curl -sS https://starship.rs/install.sh | sh
-  fi
-
+# Starship
+if ! type starship; then
+  curl -sS https://starship.rs/install.sh | sh
 fi
 
 echo ""

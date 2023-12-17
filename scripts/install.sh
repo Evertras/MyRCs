@@ -142,15 +142,20 @@ fi
 # Bootstrap standard .gitconfig to use our GPG key
 if [ ! -f ~/.gitconfig ]; then
   echo "Creating basic ~/.gitconfig with GPG signing enabled"
-  echo "Using GPG key ${gpg_key}"
+  read -p "Email to use for default git commits: " git_commit_email
+  echo ""
+  # TODO: Check this automatically some day
+  echo "Using GPG key ${gpg_key} (NOTE: this may need to be updated if using a GPG key with different email!)"
   echo "[user]
-  email = bfullj@gmail.com
+  email = ${git_commit_email}
   name = Brandon Fulljames
   signingkey = ${gpg_key}
 [commit]
   gpgsign = true
 [gpg]
-  program = ${gpg_bin}" > ~/.gitconfig
+  program = ${gpg_bin}
+[init]
+  defaultBranch = main" > ~/.gitconfig
 fi
 
 # Make sure en_US is actually installed (need this for WSL, etc)

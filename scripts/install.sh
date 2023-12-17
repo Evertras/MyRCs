@@ -45,7 +45,6 @@ link .bash_profile
 link .editorconfig
 link .tmux.conf
 link .vimrc
-link shell.nix
 
 # Sample tmux config
 if ! [[ -f ~/.tmux.local.conf ]]; then

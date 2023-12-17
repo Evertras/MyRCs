@@ -81,8 +81,8 @@ return require('packer').startup(function(use)
   -- Highlight characters to jump to in line
   use 'unblevable/quick-scope'
 
-  -- Copilot (personal)
-  use 'github/copilot.vim'
+  -- Copilot (personal) (DISABLED for now)
+  --use 'github/copilot.vim'
 
   -- Debugger
   -- https://github.com/mfussenegger/nvim-dap

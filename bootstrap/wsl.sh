@@ -84,5 +84,12 @@ if ! type starship; then
   curl -sS https://starship.rs/install.sh | sh
 fi
 
+# fzf
+if ! type fzf; then
+  pushd ~/bin
+    curl -L https://github.com/junegunn/fzf/releases/download/0.44.1/fzf-0.44.1-linux_amd64.tar.gz | tar -xz
+  popd
+fi
+
 echo ""
 echo "Done! You may need to restart for any major installs to take effect."

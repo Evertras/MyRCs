@@ -81,7 +81,7 @@ return require('packer').startup(function(use)
   -- Highlight characters to jump to in line
   use 'unblevable/quick-scope'
 
-  -- Copilot (personal) (DISABLED for now)
+  -- Copilot (personal) (DISABLED for now due to performance issues)
   --use 'github/copilot.vim'
 
   -- Debugger

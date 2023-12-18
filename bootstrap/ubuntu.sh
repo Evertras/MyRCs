@@ -76,17 +76,26 @@ fi
 if ! type nvim; then
   echo "Installing Neovim from source"
   # The apt package is very old, we want latest so we build from source
+  # Need this for GLIBCXX_3.4.29
+  if [ ! -f /etc/apt/sources.list.d/ubuntu-toolchain-r-ubuntu-test-focal.list ]; then
+    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    sudo apt update
+  fi
+  sudo apt install -y g++-11
   # https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
   sudo apt install -y ninja-build gettext cmake unzip curl
   rm -rf ~/.evertras/store/nvim
   mkdir -p ~/.evertras/store/nvim
   pushd ~/.evertras/store/nvim
     git clone https://github.com/neovim/neovim
-    cd neovim
-    # Latest has had some strange behavior in the past, so pin here
-    git checkout v0.9.4
-    make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.evertras/store/nvim"
-    make install
+    pushd neovim
+      # Latest has had some strange behavior in the past, so pin here
+      git checkout v0.9.4
+      make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=~/.evertras/store/nvim"
+      make install
+    popd
+    # Get rid of the giant git repo
+    rm -rf ~/.evertras/store/nvim/neovim
     # Need to keep .evertras/store/nvim around for dependencies, so just link to make that explicit
     ln -s ~/.evertras/store/nvim/bin/nvim ~/bin/nvim
   popd

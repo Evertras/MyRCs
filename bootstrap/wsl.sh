@@ -16,6 +16,9 @@ mkdir -p ~/bin
 # so that we can install it with asdf or pyenv
 #sudo apt install -y --no-upgrade build-essential libncursesw5-dev libreadline-gplv2-dev libssl-dev libgdbm-dev libc6-dev libsqlite3-dev libbz2-dev libffi-dev
 
+# Needed for neovim treesitter yaml
+sudo apt install -y g++
+
 # Neovim
 if ! type nvim; then
   echo "Building neovim from source"

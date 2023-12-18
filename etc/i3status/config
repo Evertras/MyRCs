@@ -7,8 +7,8 @@ general {
 order += "load"
 order += "memory"
 order += "ethernet eno1"
-order += "tztime local"
 order += "tztime UTC"
+order += "tztime local"
 
 ethernet eno1 {
   format_up = "%ip"
@@ -16,11 +16,11 @@ ethernet eno1 {
 }
 
 tztime local {
-  format = "%Y-%m-%d %H:%M:%S %Z"
+  format = "%Y-%m-%d %H:%M:%S %Z "
 }
 
 tztime UTC {
-  format = "%m-%d %H:%M:%S UTC "
+  format = "%m-%d %H:%M:%S UTC"
   timezone = "UTC"
 }
 

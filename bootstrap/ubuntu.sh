@@ -142,6 +142,7 @@ fi
 if ! type fzf; then
   # Get later version than what's in apt
   pushd ~/bin
+    echo "Installing fzf to ~/bin"
     curl -L https://github.com/junegunn/fzf/releases/download/0.44.1/fzf-0.44.1-linux_amd64.tar.gz | tar -xz
   popd
 fi

@@ -234,34 +234,15 @@ function git-merged() {
   git branch -d "${branch}"
 }
 
+function aws-connect() {
+  aws ssm start-session --target "${1}"
+}
+
 function aws-ec2-list() {
   aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" |
     jq -r '.Reservations | .[] | .Instances | .[] | { Id: .InstanceId, Name: (.Tags[] | select(.Key == "Name") | .Value) } | [.Name, .Id] | @tsv' |
     sort |
     column -t
-}
-
-function aws-connect() {
-  aws ssm start-session --target "${1}"
-}
-
-function asdf-install-latest() {
-  thing="${1}"
-
-  if [[ -z "${thing}" ]]; then
-    echo "Usage: asdf-install-latest <thing>"
-    echo "  Example: asdf-install-latest nodejs"
-    return
-  fi
-
-  if ! asdf list "${thing}" &>/dev/null; then
-    echo "Installing ${thing}"
-    asdf plugin add "${thing}" || return
-  fi
-
-  version=$(asdf latest "${thing}")
-
-  asdf install "${thing}" "${version}"
 }
 
 # A place for locally built tools to avoid global installs

@@ -156,5 +156,21 @@ if ! type fzf; then
   popd
 fi
 
+# entr
+if ! type entr; then
+  rm -rf ~/.evertras/store/entr
+  mkdir -p ~/.evertras/store/entr
+  pushd ~/.evertras/store/entr
+    git clone https://github.com/eradman/entr build
+    pushd build
+      ./configure
+      make test
+      make install DESTDIR=~/.evertras/store/entr
+      ln -s ~/.evertras/store/entr/usr/local/bin/entr ~/bin/entr
+    popd
+    rm -rf build
+  popd
+fi
+
 echo ""
 echo "Done! You may need to restart for any major installs to take effect."

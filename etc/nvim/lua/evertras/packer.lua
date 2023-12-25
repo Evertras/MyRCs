@@ -60,6 +60,9 @@ return require('packer').startup(function(use)
     }
   }
 
+  -- https://github.com/simrat39/rust-tools.nvim
+  use 'simrat39/rust-tools.nvim'
+
   -- JSON/YAML schema support
   -- https://github.com/b0o/SchemaStore.nvim
   use 'b0o/schemastore.nvim'

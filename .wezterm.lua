@@ -11,6 +11,9 @@ config.enable_tab_bar = false
 config.window_background_opacity = 0.5
 
 config.color_scheme = 'catppuccin-mocha'
-config.font = wezterm.font 'MartianMono Nerd Font Mono'
+
+-- Fonts
+config.font = wezterm.font 'Hasklug Nerd Font Mono'
+config.font_size = 18
 
 return config

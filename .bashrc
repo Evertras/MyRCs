@@ -245,6 +245,21 @@ function aws-ec2-list() {
     column -t
 }
 
+function kitty-theme() {
+  if [ -z "$1" ]; then
+    echo 'Usage: kitty-theme <name>'
+    echo ' example: kitty-theme Catppuccin-Mocha'
+    echo ' (run kitten theme to see all possible names)'
+    return
+  fi
+
+  kitten theme --dump-theme "$1" > ~/.config/kitty/kitty.d/theme.conf
+}
+
+function kitty-reload() {
+  kill -SIGUSR1 $(pgrep kitty)
+}
+
 # A place for locally built tools to avoid global installs
 export PATH="~/bin:${PATH}"
 

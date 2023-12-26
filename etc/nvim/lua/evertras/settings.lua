@@ -31,3 +31,6 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- Start unfolded
 vim.cmd("autocmd BufEnter,Syntax * normal zz")
+
+-- Autoreload kitty config
+vim.cmd("autocmd bufwritepost ~/.config/kitty/* :silent !kill -SIGUSR1 $(pgrep kitty)")

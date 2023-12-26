@@ -60,7 +60,7 @@ linkconfig nvim/init.lua
 linkconfig nvim/lua/evertras
 linkconfig nvim/after/plugin
 
-# Starship config
+# Starship .config
 linkconfig starship.toml
 
 # Alacritty .config
@@ -69,6 +69,11 @@ linkconfig alacritty/mode-demo.base.yml
 touch ~/.config/alacritty/override.yml
 linkconfig alacritty/alacritty.yml
 cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.yml
+
+# Kitty .config
+linkconfig kitty/kitty.conf
+mkdir -p ~/.config/kitty/kitty.d
+cp-if-not-exists etc/kitty/kitty.d/override.conf ~/.config/kitty/kitty.d/override.conf
 
 # i3 for Linux machines
 linkconfig i3/config

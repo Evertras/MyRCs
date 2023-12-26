@@ -65,6 +65,7 @@ if [[ "${desktop}" =~ ^[Yy]$ ]]; then
     rm -rf ~/.evertras/store/picom
   fi
 
+  # Alacritty as the standard terminal
   if ! type alacritty; then
     # https://github.com/alacritty/alacritty/blob/master/INSTALL.md#dependencies
     sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
@@ -74,6 +75,14 @@ if [[ "${desktop}" =~ ^[Yy]$ ]]; then
   # Wezterm as an alternative
   if ! flatpak list | grep org.wezfurlong.wezterm &>/dev/null; then
     flatpak install flathub org.wezfurlong.wezterm
+  fi
+
+  # Kitty as an alternative
+  if ! type kitty; then
+    rm -rf ~/.evertras/store/kitty.app
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest=~/.evertras/store launch=n
+    ln -s ~/.evertras/store/kitty.app/bin/kitty ~/bin/kitty
+    ln -s ~/.evertras/store/kitty.app/bin/kitten ~/bin/kitten
   fi
 fi
 

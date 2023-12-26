@@ -70,6 +70,11 @@ if [[ "${desktop}" =~ ^[Yy]$ ]]; then
     sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
     cargo install alacritty
   fi
+
+  # Wezterm as an alternative
+  if ! flatpak list | grep org.wezfurlong.wezterm &>/dev/null; then
+    flatpak install flathub org.wezfurlong.wezterm
+  fi
 fi
 
 # Neovim

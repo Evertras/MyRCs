@@ -44,6 +44,7 @@ link .bashrc
 link .bash_profile
 link .editorconfig
 link .tmux.conf
+link .wezterm.lua
 link .vimrc
 
 # Sample tmux config

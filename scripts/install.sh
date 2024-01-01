@@ -93,39 +93,9 @@ if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
-# NixOS madness
-nixos_config_file=/etc/nixos/configuration.nix
-
-if [ -f "${nixos_config_file}" ]; then
-  read -p "Link nix configuration to ${nixos_config_file}? [y/n] " -n 1 -r
-  echo ""
-
-  if [[ ! REPLY =~ ^[Yy]$ ]]; then
-
-    if [ ! -f "/etc/nixos/passwords/evertras" ]; then
-      sudo mkdir -p /etc/nixos/passwords/
-      while [ "${password}" != "${password_confirm}" ] && [ -n "${password}" ]; do
-        read -s -p "Set evertras password: " password
-        echo ""
-        read -s -p "Confirm evertras password: " password_confirm
-        echo ""
-      done
-      mkpasswd "${password}" | sudo tee /etc/nixos/passwords/evertras
-      sudo chmod 0600 /etc/nixos/passwords/evertras
-    fi
-
-    echo "Backing up old configuration.nix to /etc/nixos/old-config.nix"
-    sudo cp "${nixos_config_file}" /etc/nixos/old-config.nix
-    echo "Linking ./nix/configuration.nix -> ${nixos_config_file}"
-    sudo rm -f "${nixos_config_file}"
-    sudo ln -s $(pwd)/nix/configuration.nix "${nixos_config_file}"
-
-    echo "Switching..."
-    sudo nixos-rebuild switch
-  fi
-fi
-
+# GPG
 gnupg_agent_config_file=~/.gnupg/gpg-agent.conf
+nixos_config_file=/etc/nixos/configuration.nix
 
 if [ -f "${nixos_config_file}" ] && [ ! -f "${gnupg_agent_config_file}" ]; then
   echo "Bootstrapping ~/.gnupg/gpg-agent.conf to make pinentry work with Nix"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This contains the very few procedural steps that should ever be done
 # as part of a NixOS install.  Basically, I'm too paranoid to put even
@@ -6,7 +6,7 @@
 
 if [ ! -f "/etc/nixos/passwords/evertras" ]; then
   sudo mkdir -p /etc/nixos/passwords/
-  while [ "${password}" != "${password_confirm}" ] && [ -n "${password}" ]; do
+  while [ "${password}" != "${password_confirm}" ] || [ -z "${password}" ]; do
     read -s -p "Set evertras password: " password
     echo ""
     read -s -p "Confirm evertras password: " password_confirm

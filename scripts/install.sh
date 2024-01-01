@@ -135,6 +135,13 @@ if [ ! -f ~/.gitconfig ]; then
   defaultBranch = main" > ~/.gitconfig
 fi
 
+# Create an SSH key if one doesn't already exist
+if [ ! -d ~/.ssh ]; then
+  echo "No SSH keys found, creating one"
+  read -p "Label to use for SSH key (ex: bfullj@gmail.com): " ssh_label
+  ssh-keygen -t ed25519 -C "${ssh_label}"
+fi
+
 # Make sure en_US is actually installed (need this for WSL, etc)
 if ! locale -a 2>/dev/null | grep en_US &>/dev/null; then
   echo "en_US locale not installed, generating..."

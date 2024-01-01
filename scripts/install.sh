@@ -93,15 +93,6 @@ if [ ! -d ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
 
-# GPG
-gnupg_agent_config_file=~/.gnupg/gpg-agent.conf
-nixos_config_file=/etc/nixos/configuration.nix
-
-if [ -f "${nixos_config_file}" ] && [ ! -f "${gnupg_agent_config_file}" ]; then
-  echo "Bootstrapping ~/.gnupg/gpg-agent.conf to make pinentry work with Nix"
-  echo 'pinentry-program /run/current-system/sw/bin/pinentry' > "${gnupg_agent_config_file}"
-fi
-
 # Create a GPG key if one doesn't already exist
 gpg_key=$(gpg --list-secret-keys --keyid-format=long | grep '^sec' | head -n1 | awk '{print $2}' | awk -F/ '{print $2}')
 gpg_bin=$(which gpg2 || which gpg)
@@ -113,6 +104,15 @@ if [ -z "${gpg_key}" ]; then
 
   echo "Printing public GPG key, paste this into Github!"
   gpg --armor --export "${gpg_key}"
+fi
+
+gnupg_agent_config_file=~/.gnupg/gpg-agent.conf
+nixos_config_file=/etc/nixos/configuration.nix
+
+if [ -f "${nixos_config_file}" ] && [ ! -f "${gnupg_agent_config_file}" ]; then
+  mkdir -p ~/.gnupg/
+  echo "Bootstrapping ~/.gnupg/gpg-agent.conf to make pinentry work with Nix"
+  echo 'pinentry-program /run/current-system/sw/bin/pinentry' > "${gnupg_agent_config_file}"
 fi
 
 # Bootstrap standard .gitconfig to use our GPG key

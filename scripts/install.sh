@@ -109,6 +109,7 @@ fi
 gnupg_agent_config_file=~/.gnupg/gpg-agent.conf
 nixos_config_file=/etc/nixos/configuration.nix
 
+# TODO: Confirm this is still needed
 if [ -f "${nixos_config_file}" ] && [ ! -f "${gnupg_agent_config_file}" ]; then
   mkdir -p ~/.gnupg/
   echo "Bootstrapping ~/.gnupg/gpg-agent.conf to make pinentry work with Nix"

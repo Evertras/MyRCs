@@ -12,6 +12,7 @@ if [ ! -f "/etc/nixos/passwords/evertras" ]; then
     read -s -p "Confirm evertras password: " password_confirm
     echo ""
   done
+  echo "Writing password hash to /etc/nixos/passwords/evertras"
   mkpasswd "${password}" | sudo tee /etc/nixos/passwords/evertras
   sudo chmod 0600 /etc/nixos/passwords/evertras
 fi

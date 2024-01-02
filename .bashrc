@@ -247,6 +247,7 @@ function aws-ec2-list() {
 
 function kitty-theme() {
   kitten theme --reload-in=all --config-file-name theme.conf
+  kill -SIGUSR1 $(pgrep kitty)
 }
 
 function kitty-reload() {

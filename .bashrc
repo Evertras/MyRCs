@@ -253,6 +253,10 @@ function kitty-reload() {
   kill -SIGUSR1 $(pgrep kitty)
 }
 
+function fonts() {
+  fc-list : family | awk -F, '{print $1}' | grep Nerd | grep -E 'Mono$' | sort -u
+}
+
 # A place for locally built tools to avoid global installs
 export PATH="~/bin:${PATH}"
 

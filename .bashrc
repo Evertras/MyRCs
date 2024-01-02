@@ -279,7 +279,7 @@ function retheme() {
   IFS=$'\n'
   for color in ${colors}; do
     # Hijacked from show-color above
-    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m"};' "${color}"
+    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m"};' "${color:1}"
   done
   schemer2 -format img::kitty -in ~/.cache/styli.sh/wallpaper.jpg > ~/.config/kitty/theme.conf
   kill -SIGUSR1 $(pgrep kitty)

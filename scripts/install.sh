@@ -43,6 +43,7 @@ link .asdfrc
 link .bashrc
 link .bash_profile
 link .editorconfig
+link .face
 link .tmux.conf
 link .wezterm.lua
 link .vimrc

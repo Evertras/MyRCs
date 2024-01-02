@@ -246,14 +246,7 @@ function aws-ec2-list() {
 }
 
 function kitty-theme() {
-  if [ -z "$1" ]; then
-    echo 'Usage: kitty-theme <name>'
-    echo ' example: kitty-theme Catppuccin-Mocha'
-    echo ' (run kitten theme to see all possible names)'
-    return
-  fi
-
-  kitten theme --dump-theme "$1" > ~/.config/kitty/kitty.d/theme.conf
+  kitten theme --reload-in=all --config-file-name theme.conf
 }
 
 function kitty-reload() {

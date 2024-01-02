@@ -258,6 +258,33 @@ function fonts() {
   fc-list : family | awk -F, '{print $1}' | grep Nerd | grep -E 'Mono$' | sort -u
 }
 
+function show-color() {
+    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m "};print "\n"' "$@"
+}
+
+function retheme() {
+  searchterm="$@"
+  if [ -z "${searchterm}" ]; then
+    searchterm=mountain
+  fi
+
+  if ! type schemer2 &> /dev/null; then
+    mkdir -p ~/bin
+    GOBIN=~/bin/schemer2 go install github.com/thefryscorer/schemer2@latest
+  fi
+
+  echo "Retheming to '${searchterm}'"
+  styli.sh -s "${searchterm}"
+  colors=$(schemer2 -format img::colors -in ~/.cache/styli.sh/wallpaper.jpg)
+  IFS=$'\n'
+  for color in ${colors}; do
+    # Hijacked from show-color above
+    perl -e 'foreach $a(@ARGV){print "\e[48:2::".join(":",unpack("C*",pack("H*",$a)))."m \e[49m"};' "${color}"
+  done
+  schemer2 -format img::kitty -in ~/.cache/styli.sh/wallpaper.jpg > ~/.config/kitty/theme.conf
+  kill -SIGUSR1 $(pgrep kitty)
+}
+
 # A place for locally built tools to avoid global installs
 export PATH="~/bin:${PATH}"
 

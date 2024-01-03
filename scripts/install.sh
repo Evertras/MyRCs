@@ -9,6 +9,11 @@ function link() {
 	src=$(pwd)/${1}
 	linkfile=${HOME}/${1}
 
+  if [ -f "${linkfile}" ]; then
+    echo "File ${linkfile} already exists, not touching"
+    return
+  fi
+
 	echo "Linking ${src} -> ${linkfile}"
 	rm ${linkfile} &>/dev/null || true
 	ln -s ${src} ${linkfile}

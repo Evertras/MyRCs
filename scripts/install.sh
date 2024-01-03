@@ -15,7 +15,6 @@ function link() {
   fi
 
 	echo "Linking ${src} -> ${linkfile}"
-	rm ${linkfile} &>/dev/null || true
 	ln -s ${src} ${linkfile}
 }
 

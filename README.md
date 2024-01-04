@@ -1,5 +1,7 @@
 # RCs
 
+*DEPRECATED:* prefer using home-manager with [nix-systems](https://github.com/Evertras/nix-systems) repo!
+
 My RCs and stuff.
 
 ## Useful links

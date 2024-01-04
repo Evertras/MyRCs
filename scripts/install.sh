@@ -89,8 +89,7 @@ cp-if-not-exists etc/alacritty/mode-demo.base.yml ~/.config/alacritty/mode-demo.
 
 # Kitty .config
 linkconfig kitty/kitty.conf
-mkdir -p ~/.config/kitty/kitty.d
-cp-if-not-exists etc/kitty/kitty.d/override.conf ~/.config/kitty/kitty.d/override.conf
+cp-if-not-exists etc/kitty/override.conf ~/.config/kitty/override.conf
 
 # i3 for Linux machines
 linkconfig i3/config

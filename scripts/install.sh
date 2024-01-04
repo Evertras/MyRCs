@@ -53,16 +53,23 @@ link .bashrc
 link .bash_profile
 link .editorconfig
 link .face
-link .tmux.conf
 link .wezterm.lua
 link .vimrc
 
-# Sample tmux config
-if ! [[ -f ~/.tmux.local.conf ]]; then
-  echo "# Custom tmux settings for this machine.  Example:
+# Bit of a special case, if we're using home-manager
+# to handle our tmux conf then don't jump in
+if [ -f ~/.config/tmux/tmux.conf ]; then
+  echo "~/.config/tmux/tmux.conf already exists, skipping tmux.conf"
+else
+  link .tmux.conf
 
-# Use homebrew's bash
-#set -g default-shell /usr/local/bin/bash" > ~/.tmux.local.conf
+  # Sample tmux config
+  if ! [[ -f ~/.tmux.local.conf ]]; then
+    echo "# Custom tmux settings for this machine.  Example:
+
+  # Use homebrew's bash
+  #set -g default-shell /usr/local/bin/bash" > ~/.tmux.local.conf
+  fi
 fi
 
 # Nvim .config

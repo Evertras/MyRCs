@@ -23,6 +23,11 @@ function linkconfig() {
 	linkfile=${HOME}/.config/${1}
 	dir=${linkfile%/*}
 
+  if [ -f "${linkfile}" ]; then
+    echo "File ${linkfile} already exists, not touching"
+    return
+  fi
+
 	if [[ -d ${src} ]]; then
 		echo "Linking dir ${src} -> ${linkfile}"
 	else
